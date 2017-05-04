@@ -195,6 +195,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -213,6 +217,22 @@
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Skybrud.Essentials, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Skybrud.Essentials.1.0.7\lib\net45\Skybrud.Essentials.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Skybrud.ImagePicker, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Skybrud.ImagePicker.1.1.1\lib\net45\Skybrud.ImagePicker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Skybrud.LinkPicker, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Skybrud.LinkPicker.1.1.0\lib\net45\Skybrud.LinkPicker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Skybrud.Umbraco.GridData, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Skybrud.Umbraco.GridData.2.0.0\lib\net45\Skybrud.Umbraco.GridData.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System">
@@ -359,6 +379,14 @@
     </Reference>
     <Reference Include="UrlRewritingNet.UrlRewriter, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UrlRewritingNet.UrlRewriter.2.0.7\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -581,9 +609,43 @@
     <Compile Include="Umbraco\TreeInit.aspx.designer.cs">
       <DependentUpon>treeInit.aspx</DependentUpon>
     </Compile>
+    <Content Include="App_Plugins\CustomGridEditors\Paragraph\Controllers\Paragraph.js" />
+    <Content Include="App_Plugins\CustomGridEditors\Paragraph\Styles\Paragraph.css" />
+    <Content Include="App_Plugins\CustomGridEditors\Paragraph\Views\editor.html" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Controllers\ImagePicker.js" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Controllers\ImagePickerGridEditor.js" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Controllers\ImagePickerPreValues.js" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Directives\ImagePicker.js" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Lang\da-DK.xml" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Lang\en-GB.xml" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Lang\en-US.xml" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Services\ImagePickerService.js" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Styles\ImagePicker.css" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Styles\ImagePicker.min.css" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Views\ImagePicker.html" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Views\ImagePickerDirective.html" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Views\ImagePickerGridEditor.html" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Views\ImagePickerPreValues.html" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Views\Partials\ImagePickerDebugger.html" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Views\Partials\ImagePickerList.html" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\Views\Partials\ImagePickerTiles.html" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Controllers\LinkPickerGridEditor.js" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Controllers\LinkPickerPreValues.js" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Directives\LinkPicker.js" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Lang\da-DK.xml" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Lang\en-GB.xml" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Services\LinkPickerService.js" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Styles\LinkPicker.css" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Styles\LinkPicker.min.css" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Styles\Table.css" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Styles\Table.min.css" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Views\LinkPicker.html" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Views\LinkPickerDirective.html" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Views\LinkPickerGridEditor.html" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Views\LinkPickerPreValues.html" />
     <Content Include="App_Plugins\YouTube\css\YouTube.css" />
     <Content Include="App_Plugins\YouTube\js\YouTube.js" />
     <Content Include="App_Plugins\YouTube\views\preValues\YouTube.ChannelInfo.html" />
@@ -651,6 +713,12 @@
     <Content Include="Umbraco\Install\Views\Web.config" />
     <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
     <Content Include="App_Plugins\YouTube\package.manifest" />
+    <Content Include="App_Plugins\Skybrud.ImagePicker\package.manifest" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\package.manifest" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Styles\LinkPicker.less" />
+    <Content Include="App_Plugins\Skybrud.LinkPicker\Styles\Table.less" />
+    <Content Include="App_Plugins\CustomGridEditors\package.manifest" />
+    <Content Include="App_Plugins\CustomGridEditors\Paragraph\Views\Render.cshtml" />
     <None Include="Config\404handlers.Release.config">
       <DependentUpon>404handlers.config</DependentUpon>
     </None>
@@ -1993,6 +2061,13 @@
     <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
+    <Content Include="Views\Partials\Grid\CustomGrid.cshtml" />
+    <Content Include="Views\DocModel.cshtml" />
+    <Content Include="Views\DocModelAlt.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\SkybrudImagePicker.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\SkybrudImagePicker2.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\SkybrudImagePicker3.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\SkybrudImagePickerParallax.cshtml" />
     <None Include="Web.Debug.config.transformed" />
     <None Include="web.Template.Debug.config">
       <DependentUpon>Web.Template.config</DependentUpon>
