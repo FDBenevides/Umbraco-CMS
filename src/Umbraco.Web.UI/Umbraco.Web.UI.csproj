@@ -146,6 +146,10 @@
       <HintPath>..\packages\ImageProcessor.Web.4.8.2\lib\net45\ImageProcessor.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Lecoati.LeBlender.Extension, Version=1.0.8.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lecoati.LeBlender.1.0.8.4\lib\Lecoati.LeBlender.Extension.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net-mediumtrust.2.0.0\lib\log4net.dll</HintPath>
@@ -381,8 +385,8 @@
       <HintPath>..\packages\UrlRewritingNet.UrlRewriter.2.0.7\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -612,6 +616,28 @@
     <Content Include="App_Plugins\CustomGridEditors\Paragraph\Controllers\Paragraph.js" />
     <Content Include="App_Plugins\CustomGridEditors\Paragraph\Styles\Paragraph.css" />
     <Content Include="App_Plugins\CustomGridEditors\Paragraph\Views\editor.html" />
+    <Content Include="App_Plugins\LeBlender\backoffice\GridEditorManager\delete.html" />
+    <Content Include="App_Plugins\LeBlender\backoffice\GridEditorManager\delete.js" />
+    <Content Include="App_Plugins\LeBlender\backoffice\GridEditorManager\edit.html" />
+    <Content Include="App_Plugins\LeBlender\backoffice\GridEditorManager\edit.js" />
+    <Content Include="App_Plugins\LeBlender\backoffice\GridEditorManager\sort.html" />
+    <Content Include="App_Plugins\LeBlender\backoffice\GridEditorManager\sort.js" />
+    <Content Include="App_Plugins\LeBlender\common\directive\blendereditorwrapper.js" />
+    <Content Include="App_Plugins\LeBlender\common\directive\layersresizabledraggable.js" />
+    <Content Include="App_Plugins\LeBlender\common\directive\propertygrideditorwrapper.js" />
+    <Content Include="App_Plugins\LeBlender\common\filter\orderobjectby.filter.js" />
+    <Content Include="App_Plugins\LeBlender\common\services\requesthelper.service.js" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\assets\parameterconfig.css" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\dialogs\parameterconfig.controller.js" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\dialogs\parameterconfig.html" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\dialogs\parameterconfig.prevalues.controller.js" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\dialogs\parameterconfig.prevalues.html" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\leblendereditor.controller.js" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\leblendereditor.html" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\leblenderproperties.controller.js" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\leblenderproperties.html" />
+    <Content Include="App_Plugins\LeBlender\editors\textstring\textstringconfig.html" />
+    <Content Include="App_Plugins\LeBlender\views_samples\sample_styles.css" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
@@ -652,6 +678,11 @@
     <Content Include="App_Plugins\YouTube\views\preValues\YouTube.MinMax.html" />
     <Content Include="App_Plugins\YouTube\views\preValues\YouTube.orderby.html" />
     <Content Include="App_Plugins\YouTube\views\propertyEditors\YouTube.channel.html" />
+    <Content Include="bin\Lecoati.LeBlender.Extension.dll" />
+    <Content Include="bin\Skybrud.Essentials.dll" />
+    <Content Include="bin\Skybrud.ImagePicker.dll" />
+    <Content Include="bin\Skybrud.LinkPicker.dll" />
+    <Content Include="bin\Skybrud.Umbraco.GridData.dll" />
     <Content Include="Config\grid.editors.config.js" />
     <Content Include="Config\Lang\cs-CZ.user.xml" />
     <Content Include="Config\Lang\da-DK.user.xml" />
@@ -719,6 +750,13 @@
     <Content Include="App_Plugins\Skybrud.LinkPicker\Styles\Table.less" />
     <Content Include="App_Plugins\CustomGridEditors\package.manifest" />
     <Content Include="App_Plugins\CustomGridEditors\Paragraph\Views\Render.cshtml" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\views\Base.cshtml" />
+    <Content Include="App_Plugins\LeBlender\editors\leblendereditor\views\LeBlender.cshtml" />
+    <Content Include="App_Plugins\LeBlender\package.manifest" />
+    <Content Include="App_Plugins\LeBlender\views_samples\Carousel.cshtml" />
+    <Content Include="App_Plugins\LeBlender\views_samples\Highlight.cshtml" />
+    <Content Include="App_Plugins\LeBlender\views_samples\Tabs.cshtml" />
+    <Content Include="App_Plugins\LeBlender\Web.config" />
     <None Include="Config\404handlers.Release.config">
       <DependentUpon>404handlers.config</DependentUpon>
     </None>

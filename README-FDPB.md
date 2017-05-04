@@ -9,7 +9,7 @@ Guidelines
 ## Packages
 * adicionado ao proj "Umbraco.Web.UI" (via nuget) os Umbraco package "Skybrud.ImagePicker" e "Skybrud.LinkPicker" => DLL's + ficheiros frontend (Umbraco.Web.UI\App_Plugins\Skybrud.*\*)
 
-**(COM PROBLEMAS, AINDA NAO FUNCIONA)** - adicionado ao proj "Umbraco.Web.UI" (via nuget) o Umbraco package "Umbraco LeBlender" 1.0.8.4
+* adicionado ao proj "Umbraco.Web.UI" (via nuget) o Umbraco package "Umbraco LeBlender" 1.0.8.4
 
 
 ### **para validar** ###
