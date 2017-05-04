@@ -1,0 +1,30 @@
+﻿@model dynamic
+@using Skybrud.ImagePicker;
+@using Skybrud.ImagePicker.Extensions;
+
+@try
+{
+    ImagePickerList imagePickerList = ImagePickerList.Parse(Model.value);
+    bool hasItems = imagePickerList.HasItems;
+
+
+    if (hasItems)
+    {
+        if (!string.IsNullOrWhiteSpace(imagePickerList.Title))
+        {
+            <text>@Html.Partial(imagePickerList.Title, imagePickerList)</text>
+        }
+        else
+        {
+            foreach (ImagePickerItem imageItem in imagePickerList.Items)
+            {
+                <img src="@imageItem.Image.GetCropUrl(cropAlias:"square_thumb", useCropDimensions:true )" title="@imageItem.Title" /><span>@imageItem.Link.JObject</span>
+            }
+        }
+
+    }
+}
+catch (Exception ex)
+{
+<pre>@ex.ToString()</pre>
+}
