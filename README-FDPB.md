@@ -63,7 +63,7 @@ Devs
     ![skybrudimagepicker grideditor set partial view](fdpb-images/skybrudimagepicker-grideditor-setpartial.png)
 .
 
-2.  Simple Paragraph
+2.  Simple Paragraph 
     ```json
     {
       "name": "Simple Paragraph",
