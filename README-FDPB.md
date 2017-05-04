@@ -55,6 +55,7 @@ Devs
     ```
     Este grid editor usa a partial view `Views/Partials/Grid/Editors/SkybrudImagePicker.cshtml` que é responsável por fazer parsing do valor JSON da propriedade para o tipo `Skybrud.ImagePicker.ImagePickerList` e, caso exista uma partial configurada no editor da grid (neste momento usa a propriedade 'Title' do SkybrudImagePicker), carrega uma partial view específica
     ```csharp
+    ///excerpt of partial view 'SkybrudImagePicker.cshtml'
     if (!string.IsNullOrWhiteSpace(imagePickerList.Title))
     {
         <text>@Html.Partial(imagePickerList.Title, imagePickerList)</text>
@@ -63,7 +64,7 @@ Devs
     ![skybrudimagepicker grideditor set partial view](fdpb-images/skybrudimagepicker-grideditor-setpartial.png)
 .
 
-2.  Simple Paragraph 
+2.  Simple Paragraph
     ```json
     {
       "name": "Simple Paragraph",
@@ -73,4 +74,7 @@ Devs
       "icon": "icon-keyboard"
     }
     ```
+    Este grid editor permite especificar css classes para serem considerados na renderização da propriedade
+    
+    ![simpleparagraph grideditor css classes view](fdpb-images/simpleparagraph-grideditor-cssclass.png)
     
