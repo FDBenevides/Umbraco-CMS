@@ -26,18 +26,18 @@ Devs
 ===========
 * Instalação do website tem o **Models Builder** configurado para **_LiveDll_** (namespace Umbraco.Web.PublishedContentModels)
 * Templates de teste DocModel e DocModelAlt são usados com o DocType "DocModel" e estão tipificados para `ContentModels.DocModel` 
-```
-@inherits UmbracoViewPage<ContentModels.DocModel>
-@using ContentModels = Umbraco.Web.PublishedContentModels;
-```
-* Template DocModel usa grid nativa de Umbraco para renderizar
+    ```
+    @inherits UmbracoViewPage<ContentModels.DocModel>
+    @using ContentModels = Umbraco.Web.PublishedContentModels;
+    ```
+    * Template DocModel usa grid nativa de Umbraco para renderizar
 ``@Html.GetGridHtml(Model, "grid")``
 
-* Template DocModelAlt usa uma custom grid para renderizar
+    * Template DocModelAlt usa uma custom grid para renderizar
 ``@Html.GetGridHtml(Model, "grid", "CustomGrid")``
 
 * Custom Grid Editors (`App_Plugins/CustomGridEditors/*`)
-    1. SkybrudImagePicker
+1. SkybrudImagePicker
     ```json
     { //depends on 'Skybrud.ImagePicker' package
       "name": "Slider",
