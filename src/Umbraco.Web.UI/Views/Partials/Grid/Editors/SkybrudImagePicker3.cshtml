@@ -1,0 +1,37 @@
+﻿@model ImagePickerList
+@using Skybrud.ImagePicker;
+@using Skybrud.ImagePicker.Extensions;
+
+@try
+{
+    bool hasItems = Model.HasItems;
+
+    if (hasItems)
+    {
+        <div class="causes-slider">
+            @foreach (ImagePickerItem imageItem in Model.Items)
+            {
+                <div class="item col-md-4">
+                    <div class="causes-box">
+                        <div class="causes-thumb">
+                            <!-- <span class="image-badge">194 Day left</span> -->
+                            <img src="@imageItem.Image.GetCropUrl(cropAlias:"wide_thumb", useCropDimensions:true )" alt="@imageItem.Title" class="img-responsive">
+                        </div>
+                        <div class="causes-desc">
+                            <h4><a href="@imageItem.Link.Url">@imageItem.Title</a></h4>
+                            <p>
+                                @imageItem.Description
+                            </p>
+                            <a href="@imageItem.Link.Url" class="btn btn-theme-bg">Know More</a>
+                        </div>
+                    </div><!--end causes box-->
+                </div><!--end causes item-->
+            }
+        </div>
+    }
+    
+}
+catch (Exception ex)
+{
+<pre>@ex.ToString()</pre>
+}

@@ -1,0 +1,51 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/CustomGridEditors/Paragraph/Controllers/Paragraph.js"
+  ],
+  "css": [
+    "~/App_Plugins/CustomGridEditors/Paragraph/Styles/Paragraph.css"
+  ],
+
+  "gridEditors": [
+    { //depends on 'Skybrud.ImagePicker' package
+      "name": "Slider",
+      "alias": "Skybrud.ImagePicker.GridEditor",
+      "view": "/App_Plugins/Skybrud.ImagePicker/Views/ImagePickerGridEditor.html",
+      "render": "SkybrudImagePicker",
+      "icon": "icon-pictures-alt-2",
+      "config": {
+        "title": {
+          "show": true,
+          "placeholder": "partial view to use when rendering the content"
+        }
+      }
+    },
+    {
+      "name": "Headline h2",
+      "alias": "headlineh2",
+      "view": "textstring",
+      "icon": "icon-coin",
+      "config": {
+        "style": "",
+        "markup": "<h2>#value#</h2>"
+      }
+    },
+    {
+      "name": "Headline h3",
+      "alias": "headlineh3",
+      "view": "textstring",
+      "icon": "icon-coin",
+      "config": {
+        "style": "",
+        "markup": "<h3>#value#</h3>"
+      }
+    },
+    {
+      "name": "Simple Paragraph",
+      "alias": "paragraph",
+      "view": "/App_Plugins/CustomGridEditors/Paragraph/Views/Editor.html",
+      "render": "/App_Plugins/CustomGridEditors/Paragraph/Views/Render.cshtml",
+      "icon": "icon-keyboard"
+    }
+  ]
+}

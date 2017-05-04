@@ -1,0 +1,19 @@
+﻿@model ImagePickerList
+@using Skybrud.ImagePicker;
+@using Skybrud.ImagePicker.Extensions;
+
+@try
+{
+    bool hasItems = Model.HasItems;
+
+    if (hasItems)
+    {
+        <div class="parallax-bg" style="background: url('@Model.Items[0].Image.Url'); height:300px"></div>
+        
+    }
+    
+}
+catch (Exception ex)
+{
+<pre>@ex.ToString()</pre>
+}

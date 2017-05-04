@@ -1,0 +1,25 @@
+﻿@model ImagePickerList
+@using Skybrud.ImagePicker;
+@using Skybrud.ImagePicker.Extensions;
+
+@try
+{
+    bool hasItems = Model.HasItems;
+
+    if (hasItems)
+    {
+        foreach (ImagePickerItem imageItem in Model.Items)
+        {
+            <a href="@imageItem.Link.Url" target="@imageItem.Link.Target">
+                <img src="@imageItem.Image.GetCropUrl(cropAlias:"wide_thumb", useCropDimensions:true )" title="@imageItem.Title" />
+                <span>@imageItem.Title</span>
+                <span>@imageItem.Description</span>
+                <span>@imageItem.Link.JObject</span>
+            </a>
+        }
+    }
+}
+catch (Exception ex)
+{
+<pre>@ex.ToString()</pre>
+}

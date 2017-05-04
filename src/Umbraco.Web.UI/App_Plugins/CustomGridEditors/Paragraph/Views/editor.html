@@ -1,0 +1,13 @@
+﻿<div class="cge" ng-controller="CustomGridEditors.ParagraphController">
+    <div class="css-config">
+        <span class="control-label left-label">CSS Classes</span><input type="text" ng-model="control.value.css" />
+    </div>
+    <div class="text-config">
+        <textarea rows="1"
+                  umb-auto-resize
+                  umb-auto-focus
+                  class="textstring input-block-level" id="{{control.uniqueId}}_text"
+                  ng-model="control.value.text"
+                  localize="placeholder" placeholder="@grid_placeholderWriteHere"></textarea>
+    </div>
+</div>
