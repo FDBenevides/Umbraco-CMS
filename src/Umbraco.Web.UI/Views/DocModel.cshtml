@@ -4,52 +4,21 @@
 @using Skybrud.ImagePicker.Extensions;
 @using ClientDependency.Core.Mvc;
 @{
-    Layout = null;
+    Layout = "~/Views/_Master.cshtml";
 
     ImagePickerList imagePickerList = Model.GetImagePickerList("multiImagePicker");
-    
+
 }
-<html>
-<head>
-	@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
 
-    <!-- Bootstrap -->
-    <link href="http://fdpb.net/hp/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!--plugins-->
-    <link href="http://fdpb.net/hp/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://fdpb.net/hp/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="http://fdpb.net/hp/owl-carousel/owl.theme.css" rel="stylesheet">
-    <link href="http://fdpb.net/hp/owl-carousel/owl.transitions.css" rel="stylesheet">
-    <link href="http://fdpb.net/hp/flaticons/flaticon.css" rel="stylesheet">
-    <link href="http://fdpb.net/hp/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet">
-
-    <!-- Revolution Slider 5.x CSS settings -->
-    <link href="http://fdpb.net/hp/revolution/css/settings.css" rel="stylesheet" type="text/css" />
-    <link href="http://fdpb.net/hp/revolution/css/layers.css" rel="stylesheet" type="text/css" />
-    <link href="http://fdpb.net/hp/revolution/css/navigation.css" rel="stylesheet" type="text/css" />
-    <!--custom css file-->
-    <link href="http://fdpb.net/hp/css/style.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-<body>
     
-    @Html.GetGridHtml(Model, "grid")
-    <p>Skybrud Image Picker</p>
-    @if (imagePickerList.HasItems)
+@Html.GetGridHtml(Model, "grid")
+<p>Skybrud Image Picker</p>
+@if (imagePickerList.HasItems)
+{
+    foreach (ImagePickerItem item in imagePickerList.Items)
     {
-        foreach (ImagePickerItem item in imagePickerList.Items)
-        {
-            <img src="@item.Image.GetCropUrl(cropAlias:"square_thumb", useCropDimensions:true )" title="@item.Title" /><span>@item.Link.JObject</span>
-        }
-
-        <img src="@Umbraco.TypedMedia(1051).GetCropUrl("square_thumb")" />
+        <img src="@item.Image.GetCropUrl(cropAlias:"square_thumb", useCropDimensions:true )" title="@item.Title" /><span>@item.Link.JObject</span>
     }
-</body>
-</html>
+
+    <img src="@Umbraco.TypedMedia(1051).GetCropUrl("square_thumb")" />
+}
