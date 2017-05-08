@@ -1,6 +1,7 @@
-﻿<div class="cge" ng-controller="CustomGridEditors.ParagraphController">
+﻿<div class="cge" ng-controller="CustomGridEditors.ParagraphController as pc">
+    
     <div class="css-config">
-        <span class="control-label left-label">CSS Classes</span><input type="text" ng-model="control.value.css" />
+        <span class="control-label left-label">{{control.editor.name}} CSS Classes</span><input type="text" ng-model="control.value.css" />
     </div>
     <div class="text-config">
         <textarea rows="1"

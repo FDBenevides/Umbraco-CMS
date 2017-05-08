@@ -10,47 +10,48 @@
 {
     var oneColumn = ((System.Collections.ICollection)Model.sections).Count == 1;
     
-    <div class="container">
-        <div class="row clearfix">
-            @foreach (var s in Model.sections) {
-                <div class="grid-section">
-                    <div class="col-md-@s.grid column">
-                        @foreach (var row in s.rows) {
-                            @renderRow(row, false);
-                        }
-                    </div>
-                </div>
+    foreach (var s in Model.sections) {
+        foreach (var row in s.rows) {
+            foreach (string extraDivClassOpening in GetExtraDivs(row))
+            {
+                @Html.Raw("<div class=\"" + @extraDivClassOpening + "\">")
             }
-        </div>
-    </div>   
+            
+            @renderRow(row, false);
+            foreach (string extraDivClassClosure in GetExtraDivs(row))
+            {
+                @Html.Raw("</div>")
+            }
+        }
+    }
 }
 
 @helper renderRow(dynamic row, bool singleColumn){
-    <div @RenderElementAttributes(row)>
-        
-        <div class="row clearfix">
-            @foreach ( var area in row.areas ) {
-            <div class="col-md-@area.grid column">
-                <div @RenderElementAttributes(area)>
-                    @foreach(string extraDivClassOpening in GetExtraDivs(area))
-                    {
-                        @Html.Raw("<div class=\""+@extraDivClassOpening+"\">")
-                    }
-                    @foreach (var control in area.controls)
-                    {
-                        if (control != null && control.editor != null && control.editor.view != null)
+    <div class="row clearfix">
+        <div @RenderElementAttributes(row)>
+            @foreach (var area in row.areas)
+            {
+                @*<div class="col-md-@area.grid column">*@
+                    <div @RenderElementAttributes(area)>
+                        @foreach (string extraDivClassOpening in GetExtraDivs(area))
                         {
-                            <text>@Html.Partial("grid/editors/base", (object)control)</text>
+                            @Html.Raw("<div class=\"" + @extraDivClassOpening + "\">")
                         }
-                    }
-                    @foreach (string extraDivClassClosure in GetExtraDivs(area))
-                    {
-                       @Html.Raw("</div>")
-                    }
-                </div>
-            </div>}
+                        @foreach (var control in area.controls)
+                        {
+                            if (control != null && control.editor != null && control.editor.view != null)
+                            {
+                                <text>@Html.Partial("grid/editors/base", (object)control)</text>
+                            }
+                        }
+                        @foreach (string extraDivClassClosure in GetExtraDivs(area))
+                        {
+                            @Html.Raw("</div>")
+                        }
+                    </div>
+                @*</div>*@
+            }
         </div>
-        
     </div>
 }
 

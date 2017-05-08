@@ -6,6 +6,7 @@
 .cge .left-label{
     padding-right: 5px;
     margin-top: 5px;
+    width: initial;
 }
 
 .cge .text-config{
