@@ -11,11 +11,13 @@
         <div class="causes-slider">
             @foreach (ImagePickerItem imageItem in Model.Items)
             {
+                var crop = imageItem.JObject.Property("crop") == null ? "wide_thumb" : imageItem.JObject.Value<string>("crop");
+
                 <div class="item col-md-4">
                     <div class="causes-box">
                         <div class="causes-thumb">
                             <!-- <span class="image-badge">194 Day left</span> -->
-                            <img src="@imageItem.Image.GetCropUrl(cropAlias:"wide_thumb", useCropDimensions:true )" alt="@imageItem.Title" class="img-responsive">
+                            <img src="@imageItem.Image.GetCropUrl(cropAlias:crop, useCropDimensions:true )" alt="@imageItem.Title" class="img-responsive">
                         </div>
                         <div class="causes-desc">
                             <h4><a href="@imageItem.Link.Url">@imageItem.Title</a></h4>

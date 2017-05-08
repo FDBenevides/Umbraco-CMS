@@ -1,0 +1,35 @@
+﻿@model ImagePickerList
+@using Skybrud.ImagePicker;
+@using Skybrud.ImagePicker.Extensions;
+
+@try
+{
+    bool hasItems = Model.HasItems;
+
+    if (hasItems)
+    {
+        <div class="masonry-container-lightbox cbp">
+            @foreach (ImagePickerItem imageItem in Model.Items)
+            {
+                var crop = imageItem.JObject.Property("crop") == null ? "wide_thumb" : imageItem.JObject.Value<string>("crop");
+
+                <div class="cbp-item col-sm-4 col-md-4">
+                    <a href="@imageItem.Image.Url" class="overlay-box cbp-lightbox">
+                        <img src="@imageItem.Image.GetCropUrl(cropAlias:crop, useCropDimensions:true )" alt="@imageItem.Title" class="img-responsive">
+                        <div class="overlay">
+                            <div class="overlay-content">
+                                <h4>@imageItem.Title</h4>
+                                <span>@imageItem.Description</span>
+                            </div>
+                        </div>
+                    </a>
+                </div><!--end col-->
+            }
+        </div>
+    }
+    
+}
+catch (Exception ex)
+{
+<pre>@ex.ToString()</pre>
+}
