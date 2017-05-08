@@ -1,0 +1,12 @@
+﻿@model Lecoati.LeBlender.Extension.Models.LeBlenderModel
+
+@try
+{
+    <pre>@Model.Items.First().GetRawValue("testimonialName")</pre>
+    <pre>@Model.Items.First().GetRawValue("testimonialText")</pre>
+
+}
+catch (Exception ex)
+{
+    <pre>@ex.ToString()</pre>
+}
