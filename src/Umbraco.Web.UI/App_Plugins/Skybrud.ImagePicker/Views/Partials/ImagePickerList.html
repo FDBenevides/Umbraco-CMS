@@ -107,6 +107,11 @@
                                         </div>
                                         <textarea ng-model="item.description" localize="placeholder" placeholder="@imagepicker_labelDescriptionPlaceholder" ng-required="cfg.items.description.required" id="imagePickerRowDescription{{item.$uniqueId}}" />
                                     </div>
+                                    <div class="subpart" ng-hide="config.items.crops.hidden">
+                                        <div class="title">
+                                            <localize key="imagepicker_labelCrops">Crops</localize>
+                                        </div>
+                                        <select ng-model="item.crop" ng-options="crop for crop in item.$crops"></select>                                        
                                 </div>
                                 <div class="subpart link" ng-hide="config.items.link.hidden">
                                     <div class="title"><localize key="imagepicker_labelLink">Link</localize></div>

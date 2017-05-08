@@ -69,6 +69,7 @@
                                     item.$image = hash[item.imageId];
                                     item.$imageUrl = getImageUrl(item);
                                     item.imageUrl = getImageUrl(item);
+                                    item.$crops = getImageCrops(item);
                                 }
                             });
 
@@ -158,6 +159,26 @@
                 return item.$image ? item.$image.image + '?width=' + scope.cfg.image.width + '&height=' + scope.cfg.image.height + '&mode=crop' : null;
             }
 
+            function getImageCrops(item) {
+                var crops = [];
+
+                if (item.$image && item.$image.file && item.$image.file.crops) {
+                    item.$image.file.crops.forEach(function (a) {
+                        crops.push(a.alias); 
+                    });
+                } else if (item.$image.metaData &&
+                            item.$image.metaData.umbracoFile &&
+                            item.$image.metaData.umbracoFile.Value &&
+                            item.$image.metaData.umbracoFile.Value.crops)
+                {
+                    item.$image.metaData.umbracoFile.Value.crops.forEach(function (a) {
+                        crops.push(a.alias);
+                    });
+                }
+
+                return crops;
+            }
+
             /// Swaps two items in an array
             function swap(array, i, j) {
                 var a = array[i];
@@ -221,7 +242,7 @@
                         }
 
                         angular.forEach(model.selectedImages, function (image) {
-
+                            //debugger;
                             var item = {
                                 $uniqueId: getUniqueId(),
                                 title: '',
@@ -233,6 +254,8 @@
                             };
 
                             item.$imageUrl = item.imageUrl = getImageUrl(item);
+
+                            item.$crops = getImageCrops(item);
 
                             scope.value.items.push(item);
 
