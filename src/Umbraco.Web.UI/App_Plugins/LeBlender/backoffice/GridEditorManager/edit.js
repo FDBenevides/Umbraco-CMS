@@ -174,6 +174,17 @@
             });
         };
 
+        $scope.configChanged = function (textAreaconfig) {
+             try {
+                 var configValue = JSON.parse(textAreaconfig);
+                 $scope.model.value.config = configValue;
+             }
+             catch (e)
+             {
+ 
+             }
+        };
+
         // open icon picker
         $scope.openIconPicker = function () {
             var dialog = dialogService.iconPicker({
