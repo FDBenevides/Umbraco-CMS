@@ -10,6 +10,7 @@ Guidelines
 * adicionado ao proj "Umbraco.Web.UI" (via nuget) os Umbraco package "Skybrud.ImagePicker" e "Skybrud.LinkPicker" => DLL's + ficheiros frontend (Umbraco.Web.UI\App_Plugins\Skybrud.*\*)
 
 * adicionado ao proj "Umbraco.Web.UI" (via nuget) o Umbraco package "Umbraco LeBlender" 1.0.8.4
+    *  foi feito um fix (apenas da parte relativa a guardar a configuração de um grid editor usando o LeBlender) de acordo com o commit/pull request aqui https://github.com/Lecoati/LeBlender/pull/49/commits/c3864d0984195ca416d5a8a0cda7ac869f865633 
 
 
 ### **para validar** ###
