@@ -234,6 +234,10 @@
   width: 60px;
   flex: initial;
 }
+.SkybrudImagePicker .umb-table-cell.col-ref {
+  width: 90px;
+  flex: initial;
+}
 .SkybrudImagePicker .umb-table-cell.col-actions {
   width: 50px;
   flex: initial;

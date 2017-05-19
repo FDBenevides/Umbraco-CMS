@@ -1,0 +1,70 @@
+﻿<div >
+    <form name="horseRequestCreateForm" ng-controller="LW.HorseSales.createController" ng-submit="save()" val-form-manager>
+        <umb-load-indicator ng-if="page.loading"></umb-load-indicator>
+
+        <umb-panel ng-hide="page.loading">
+
+            <umb-header>
+                <div class="span7">
+                    <h1 class="headline">{{horseRequest.name}}</h1>
+                </div>
+
+                <div class="span5">
+                    <div class="btn-toolbar pull-right umb-btn-toolbar">
+                        <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                            <localize key="buttons_save">Save</localize>
+                        </button>
+                    </div>
+                </div>
+            </umb-header>
+            <div class="umb-panel-body umb-scrollable row-fluid">
+                <div class="umb-pane">
+                    <!--<pre>{{horseRequest}}</pre>
+                    <pre>{{saveModel}}</pre>-->
+                    <umb-control-group label="Member" description="Choose the member">
+                        <div ng-repeat="memberX in horseRequest.member">
+                            <lw-memberpicker model="memberX"></lw-memberpicker>
+                        </div>
+                        <div class="alert alert-error property-error" ng-show="horseRequest.memberRequired">Member selection is required</div>
+                    </umb-control-group>
+                    <umb-control-group label="Name" description="Enter a name for the request">
+                        <input type="text" name="name" ng-model="horseRequest.name" />
+                    </umb-control-group>
+                    <!--<div class="umb-tab-buttons" detect-fold>
+                        <div class="btn-group">
+                            <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                                Save
+                            </button>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+
+        </umb-panel>
+
+        <!--<pre>{{$routeParams}}</pre>
+        <pre>{{horseRequest}}</pre>-->
+
+        <!--<div class="umb-dialog-body" auto-scale="90">
+
+            <p class="umb-abstract">
+                <localize key="defaultdialogs_confirmdelete">Are you sure you want to delete</localize> <strong>{{currentNode.name}}</strong> ?
+            </p>
+
+            <!--<div ng-repeat="editor in memberPicker">
+                <umb-editor model="editor"></umb-editor>
+            </div>--
+
+            <div ng-repeat="clientX in horseRequest.client">
+                <lw-memberpicker model="clients"></lw-memberpicker>
+            </div>
+            <!--<div class="SkybrudPropertyEditors LinkPicker MultiLinkPicker">
+                <skybrud-linkpicker value="horseRequest.links.value" config="horseRequest.links.config">Sponsored by omgbacon.dk</skybrud-linkpicker>
+            </div>--
+
+            <umb-confirm on-confirm="save" on-cancel="cancelDelete">
+            </umb-confirm>
+
+        </div>-->
+    </form>
+</div>

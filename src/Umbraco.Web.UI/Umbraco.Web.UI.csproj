@@ -280,6 +280,7 @@
       <HintPath>..\packages\System.Reflection.Metadata.1.0.21\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web">
@@ -398,6 +399,18 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="App_Plugins\LW\Application\HorseSalesSection.cs" />
+    <Compile Include="App_Plugins\LW\Events\RegisterEvents.cs" />
+    <Compile Include="App_Plugins\LW\Objects\HorseSales.cs" />
+    <Compile Include="App_Plugins\LW\Objects\HorseRequest.cs" />
+    <Compile Include="App_Plugins\LW\Objects\LinkPickerItemComment.cs" />
+    <Compile Include="App_Plugins\LW\Objects\LinkPickerItem.cs" />
+    <Compile Include="App_Plugins\LW\Objects\LinkPickerList.cs" />
+    <Compile Include="App_Plugins\LW\Objects\LinkPickerMode.cs" />
+    <Compile Include="Cache\DataTypeCacheProvider.cs" />
+    <Compile Include="Controllers\DataTypeApiController.cs" />
+    <Compile Include="Controllers\HorseSaleApiController.cs" />
+    <Compile Include="Controllers\HorseSalesTreeController.cs" />
     <Compile Include="Umbraco\Install\Legacy\LoadStarterKits.ascx.cs">
       <DependentUpon>loadStarterKits.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -638,6 +651,19 @@
     <Content Include="App_Plugins\LeBlender\editors\leblendereditor\leblenderproperties.html" />
     <Content Include="App_Plugins\LeBlender\editors\textstring\textstringconfig.html" />
     <Content Include="App_Plugins\LeBlender\views_samples\sample_styles.css" />
+    <Content Include="App_Plugins\LW\backoffice\dashboard\overview.html" />
+    <Content Include="App_Plugins\LW\backoffice\horseSalesTree\create.html" />
+    <Content Include="App_Plugins\LW\backoffice\horseSalesTree\delete.html" />
+    <Content Include="App_Plugins\LW\backoffice\horseSalesTree\createController.js" />
+    <Content Include="App_Plugins\LW\backoffice\horseSalesTree\deleteController.js" />
+    <Content Include="App_Plugins\LW\backoffice\horseSalesTree\edit.html" />
+    <Content Include="App_Plugins\LW\backoffice\horseSalesTree\editController.js" />
+    <Content Include="App_Plugins\LW\backoffice\horseSalesTree\viewMember.html" />
+    <Content Include="App_Plugins\LW\backoffice\MemberPickerDirective.html" />
+    <Content Include="App_Plugins\LW\datatypeResource.js" />
+    <Content Include="App_Plugins\LW\Directives\MemberPicker.js" />
+    <Content Include="App_Plugins\LW\horseSalesResource.js" />
+    <Content Include="App_Plugins\LW\Lang\en-GB.xml" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
@@ -757,6 +783,7 @@
     <Content Include="App_Plugins\LeBlender\views_samples\Highlight.cshtml" />
     <Content Include="App_Plugins\LeBlender\views_samples\Tabs.cshtml" />
     <Content Include="App_Plugins\LeBlender\Web.config" />
+    <Content Include="App_Plugins\LW\package.manifest" />
     <None Include="Config\404handlers.Release.config">
       <DependentUpon>404handlers.config</DependentUpon>
     </None>
@@ -2106,6 +2133,9 @@
     <Content Include="Views\Partials\Grid\Editors\SkybrudImagePicker2.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\SkybrudImagePicker3.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\SkybrudImagePickerParallax.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\SkybrudImagePickerMasonry.cshtml" />
+    <Content Include="Views\_Master.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Testimonials.cshtml" />
     <None Include="Web.Debug.config.transformed" />
     <None Include="web.Template.Debug.config">
       <DependentUpon>Web.Template.config</DependentUpon>
@@ -2518,6 +2548,8 @@
     <Folder Include="Umbraco\preview\" />
     <Folder Include="Umbraco_Client\FolderBrowser\Images\" />
     <Folder Include="Umbraco_Client\Tags\images\" />
+    <Folder Include="Views\HorseSaleApi\" />
+    <Folder Include="Views\HorseSalesTree\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <ItemGroup>

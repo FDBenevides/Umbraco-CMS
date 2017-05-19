@@ -1,0 +1,14 @@
+﻿<p>Testing things</p>
+<div class="row-fluid"
+     ng-controller="Umbraco.Dashboard.StartupVideosController">
+
+    <ul class="thumbnails">
+        <li class="span2" ng-repeat="video in videos">
+            <div class="thumbnail" style="margin-right: 20px">
+                <a target="_blank" href="{{video.link}}" title="{{video.title}}">
+                    <img ng-src="{{video.thumbnail}}" alt="{{video.title}}">
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

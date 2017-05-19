@@ -1,0 +1,19 @@
+﻿{
+	javascript:[
+		"~/App_Plugins/LW/Directives/MemberPicker.js",
+		"~/App_Plugins/LW/datatypeResource.js",
+		"~/App_Plugins/LW/horseSalesResource.js",
+		"~/App_Plugins/LW/backoffice/horseSalesTree/editController.js",
+		"~/App_Plugins/LW/backoffice/horseSalesTree/deleteController.js",
+		"~/App_Plugins/LW/backoffice/horseSalesTree/createController.js",
+	
+		"~/App_Plugins/Skybrud.LinkPicker/Services/LinkPickerService.js",
+		"~/App_Plugins/Skybrud.LinkPicker/Directives/LinkPicker.js",
+		"~/App_Plugins/Skybrud.LinkPicker/Controllers/LinkPickerPreValues.js",
+		"~/App_Plugins/Skybrud.LinkPicker/Controllers/LinkPickerGridEditor.js"
+	],
+	"css": [
+		"~/App_Plugins/Skybrud.LinkPicker/Styles/LinkPicker.css",
+		"~/App_Plugins/Skybrud.ImagePicker/Styles/ImagePicker.css"
+	]
+}

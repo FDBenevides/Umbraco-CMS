@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<language alias="en" intName="English" localName="English" lcid="6" culture="en-GB">
+  <area alias="sections">
+    <key alias="horseSales">Horse Sales</key>
+  </area>
+  <area alias="lw">
+    <key alias="horseRequest">Horse Request</key>
+    <key alias="newComment">New Comment</key>
+    <key alias="optionAddComment">Add Comment</key>
+    <key alias="notSaved">Not Saved</key>
+  </area>
+</language>

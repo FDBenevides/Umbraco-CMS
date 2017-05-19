@@ -76,6 +76,39 @@
                 scope.value.items = temp;
             };
 
+            scope.addComment = function (newComment, link) {
+                console.log(newComment);
+                var d = new Date();
+                var datetime = d.toJSON();
+
+                if (!link.comments) {
+                    link.comments = [];
+                }
+
+                var nc = {
+                    "author": "LW",
+                    "text": newComment,
+                    "datetime": datetime
+                };
+                link.comments.splice(0,0,nc);
+
+                if (!link.$parent.draftComments)
+                    link.$parent.draftComments = [];
+                link.$parent.draftComments.push(nc);
+                link.$parent.newComment = "";
+            };
+
+            scope.isDraftComment = function (link, comment) {
+                if (!link.$parent) return false;
+                if (!link.$parent.draftComments) return false;
+
+                return link.$parent.draftComments.find(function (elem, index, array, source) {
+                    /*console.log(this);*/
+                    if (elem === this) { return true; }
+                    else { return false; }
+                }, comment);
+            };
+
             scope.sortableOptions = {
                 axis: 'y',
                 cursor: 'move',

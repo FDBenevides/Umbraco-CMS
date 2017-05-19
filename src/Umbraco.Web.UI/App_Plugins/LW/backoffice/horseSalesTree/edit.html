@@ -1,0 +1,170 @@
+﻿<div ng-controller="LW.HorseSales.editController">
+
+    <umb-load-indicator ng-if="page.loading"></umb-load-indicator>
+
+    <form name="horseRequestForm" ng-submit="save" val-form-manager>
+        <!--<umb-panel>
+            <umb-header>
+                <div class="span7">
+                    <h3><localize key="lw_horseRequest">[lw_horseRequest]</localize>: {{horseRequest.id}}</h3>
+                    <!--<umb-content-name placeholder="Title" ng-model="horseRequest.id" />--
+                </div>
+                <div class="span5">
+                    <div class="btn-toolbar pull-right umb-btn-toolbar">
+                        <umb-options-menu ng-show="horseRequest" current-node="horseRequest" current-section="{{CurrentSection}}">
+                            
+                        </umb-options-menu>
+                    </div>
+                </div>
+            </umb-header>
+            <div class="umb-panel-body umd-scrollable row-fluid">
+                <div class="tab-content form-horizontal" style="padding-bottom: 90px;">
+                    <div class="umb-pane">
+                        <p>Hello</p>
+                    </div>
+                </div>
+            </div>
+        </umb-panel>-->
+
+        <umb-panel>
+            <umb-header tabs="content.tabs">
+
+                <div class="umb-headline-editor-wrapper span7 ng-scope">
+                    <!--<h3><localize key="lw_horseRequest">[lw_horseRequest]</localize>: {{horseRequest.Name}}</h3>-->
+                    <input type="text" name="name" localize="placeholder" class="umb-headline ng-pristine ng-valid ng-valid-required" ng-model="horseRequest.Name" >
+                </div>
+                <div class="span5 ng-scope">
+
+                    <div class="btn-toolbar pull-right umb-btn-toolbar">
+                        <div class="btn-group" ng-animate="'fade'">
+                            <p class="btn btn-link umb-status-label ng-binding"></p>
+                        </div>
+                        <a href="" class="btn btn-success" ng-click="save()">
+                            <localize key="buttons_save">[buttons_save]</localize>
+                        </a>
+                    </div>
+                </div>
+
+            </umb-header>
+
+            <umb-tab-view>
+
+                <umb-tab id="tab1" rel="svensson">
+
+                    <div class="umb-pane">
+
+                        <div class="alert alert-info ns-alert-scheduled" ng-show="horseRequest.scheduledSendDate != undefined">
+                            <span class="icon icon-time"></span>&nbsp;<nslocalize key="ns_newsletterHasBeenScheduledForSendOut">[This letter has been schedule for send out]</nslocalize>&nbsp;{{newsletter.scheduledSendDateText | date:'yyyy-MM-dd HH:mm:ss'}}
+                        </div>
+
+                        <div class="alert alert-danger alert-ns-error" ng-show="horseRequest.statusName == 'error'">
+                            <div>
+                                <span class="icon icon-backspace"></span>
+                            </div>
+                            <div>
+                                <localize key="lw_newsletterHasStatusError">[This newsletter has the status error, something probably went wrong during the send out]</localize>
+                                <br />
+                                <br />
+                                <strong><localize key="general_errorMessage">[Error message]</localize>:</strong><br />
+                                {{horseRequest.errorMessage}}<br />
+                                <br />
+                                <localize key="lw_newsletterContinueInstructions">[You can try to continue to send the newsletter by going to the "Send options" and follow the instructions.]</localize>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <umb-property property="property" ng-repeat="property in horseRequest.Tabs['tab1']">
+                            <umb-editor model="property"></umb-editor>
+                        </umb-property>
+
+                        <!--<skybrud-linkpicker value="horseRequest.HorseLinksObj" config="linkPicker.config"></skybrud-linkpicker>-->
+                        <!--<div class="SkybrudPropertyEditors LinkPicker MultiLinkPicker">
+                            <skybrud-linkpicker value="horseRequest.links" config="linkPicker"></skybrud-linkpicker>
+                        </div>-->
+
+                    </div>
+                </umb-tab>
+
+                <umb-tab id="tab2" rel="kalle">
+                    <div class="umb-pane">
+                        <umb-property property="property" ng-repeat="property in horseRequest.Tabs['tab2']">
+                            <umb-editor model="property"></umb-editor>
+                        </umb-property>
+                    </div>
+                </umb-tab>
+
+                <umb-tab id="tab3" rel="kalle">
+                    <div class="umb-pane">
+                        <umb-property property="property" ng-repeat="property in horseRequest.Tabs['tab3']">
+                            <umb-editor model="property"></umb-editor>
+                        </umb-property>
+                    </div>
+                </umb-tab>
+
+            </umb-tab-view>
+        </umb-panel>
+
+        <!--<umb-editor-view ng-show="!page.loading" umb-tabs>
+            <umb-editor-header menu="page.menu"
+                               name="horseRequest.name"
+                               tabs="content.tabs"
+                               hide-icon="true"
+                               hide-description="true"
+                               hide-alias="true">
+            </umb-editor-header>
+
+            <umb-editor-container>
+                <umb-tabs-content class="form-horizontal" view="true">
+                    <umb-tab id="tab{{tab.id}}" ng-repeat="tab in content.tabs" rel="{{tab.id}}">
+                        <umb-property ng-repeat="property in horseRequest.Properties" property="property">
+                            <umb-editor model="property"></umb-editor>
+                        </umb-property>
+                    </umb-tab>
+                </umb-tabs-content>
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-left>
+
+                    <umb-breadcrumbs ng-if="ancestors && ancestors.length > 0"
+                                     ancestors="ancestors"
+                                     entity-type="content">
+                    </umb-breadcrumbs>
+
+                </umb-editor-footer-content-left>
+
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button ng-if="page.listViewPath"
+                                type="link"
+                                href="#{{page.listViewPath}}"
+                                label="Return to list"
+                                label-key="buttons_returnToList">
+                    </umb-button>
+
+                    <umb-button ng-if="!page.isNew && content.allowPreview"
+                                type="button"
+                                action="preview(content)"
+                                label="Preview page"
+                                label-key="buttons_showPage">
+                    </umb-button>
+
+                    <umb-button-group ng-if="defaultButton"
+                                      default-button="defaultButton"
+                                      sub-buttons="subButtons"
+                                      state="page.buttonGroupState"
+                                      direction="up"
+                                      float="right">
+                    </umb-button-group>
+
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+            <p>{{horseRequest.id}}</p><p>{{horseRequest.doctype}}</p><p>{{horseRequest.create}}</p>
+        </umb-editor-view>-->
+
+    </form>
+</div>
