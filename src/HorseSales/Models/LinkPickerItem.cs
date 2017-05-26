@@ -1,12 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Extensions;
 using Umbraco.Core.Models;
 using Umbraco.Web;
+using Skybrud.Essentials.Json.Extensions;
 
-namespace Umbraco.Web.UI.App_Plugins.LW.Objects
+namespace HorseSales.Models
 {
+    ///// BASED ON Skybrud.LinkPicker project
 
     /// <summary>
     /// Class representing a single link item.
@@ -28,13 +29,13 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
         /// Gets the ID of the selected content or media. If an URL has been selected, this will return <code>0</code>.
         /// </summary>
         [JsonProperty("id")]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets the name of the link.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets the URL of the link. Since the URL of a content or media item may change over time (eg. if renamed or
@@ -55,19 +56,37 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
         /// Gets the link target.
         /// </summary>
         [JsonProperty("target")]
-        public string Target { get; private set; }
+        public string Target { get; set; }
 
         /// <summary>
         /// Gets the associated comments.
         /// </summary>
         [JsonProperty("comments")]
-        public LinkPickerItemComment[] Comments { get; private set; }
+        public LinkPickerItemComment[] Comments { get; set; }
+
+        /// <summary>
+        /// Gets the name of the link.
+        /// </summary>
+        [JsonProperty("ref")]
+        public string Ref { get; set; }
+
+        /// <summary>
+        /// Gets the name of the link.
+        /// </summary>
+        [JsonProperty("price")]
+        public string Price { get; set; }
+
+        /// <summary>
+        /// Gets the name of the link.
+        /// </summary>
+        [JsonProperty("video")]
+        public string Video { get; set; }
 
         /// <summary>
         /// Gets the mode (or type) of the link.
         /// </summary>
         [JsonProperty("mode")]
-        public LinkPickerMode Mode { get; private set; }
+        public LinkPickerMode Mode { get; set; }
 
         /// <summary>
         /// Gets whether the link is valid.
@@ -83,6 +102,9 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
         /// </summary>
         [JsonIgnore]
         public string RawUrl { get; set; }
+
+        [JsonProperty("linkId")]
+        public int LinkId { get; internal set; }
 
         #endregion
 
@@ -108,6 +130,21 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
             RawUrl = url;
             Target = target;
             Mode = mode;
+        }
+
+        public LinkPickerItem(int id, string name, string url, string target, string mode, LinkPickerItemComment[] comments, string reference, string price, string video)
+        {
+            LinkPickerMode modeEnum = (LinkPickerMode)Enum.Parse(typeof(LinkPickerMode), mode, true);
+
+            Id = id;
+            Name = name;
+            RawUrl = url;
+            Target = target;
+            Mode = modeEnum;
+            Comments = comments;
+            Price = price;
+            Ref = reference;
+            Video = video;
         }
 
         #endregion
@@ -187,6 +224,10 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
                 RawUrl = obj.GetString("url"),
                 Target = obj.GetString("target"),
                 Comments = obj.GetArray("comments", LinkPickerItemComment.Parse),
+                Ref = obj.GetString("ref"),
+                Price = obj.GetString("price"),
+                Video = obj.GetString("video"),
+
                 Mode = mode
             };
 

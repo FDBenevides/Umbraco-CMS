@@ -6,7 +6,9 @@
         $scope.subButtons = [];
 
         $scope.page = {};
-        $scope.page.loading = false;
+        $scope.page.loading = true;
+        $scope.page.saving = false;
+        console.log("Loading started ($scope.page.loading variable: " + $scope.page.loading + " )");
         $scope.page.menu = {};
         $scope.page.menu.currentNode = null;
         $scope.page.menu.currentSection = appState.getSectionState("currentSection");
@@ -86,8 +88,6 @@
         initTabsConfig();
 
         if ($routeParams.id == -1) {
-            $scope.page.loading = true;
-
             $location.path("/horseSales/horseSalesTree/create/-1");
             //$scope.horseRequest = {
             //    "name": "test2",
@@ -98,8 +98,6 @@
             //};
             //$scope.page.loading = false;
         } else {
-            $scope.page.loading = true;
-
             horseSalesResource.getById($routeParams.id).then(function (response) {
                 loadDataTypeResources(response.data).then(function (horseRequest) {
 
@@ -112,14 +110,17 @@
                         propFinalHorseLinks.config = $scope.linkPicker;
 
                     $scope.horseRequest = horseRequest;
-                    $scope.page.loading = false;
 
+                    $scope.page.loading = false;
+                    console.log("Loading finished ($scope.page.loading variable: " + $scope.page.loading + " )");
                 });
             });
         }
 
         $scope.save = function () {
-            $scope.page.loading = true;
+            $scope.page.saving = true;
+            console.log("Saving started ($scope.page.saving variable: " + $scope.page.saving + " )");
+
 
             saveModel = {};
             _.each($scope.horseRequest.Tabs, function (tab) {
@@ -143,7 +144,8 @@
                         propFinalHorseLinks.config = $scope.linkPicker;
 
                     $scope.horseRequest = horseRequest;
-                    $scope.page.loading = false;
+                    $scope.page.saving = false;
+                    console.log("Loading finished ($scope.page.saving variable: " + $scope.page.saving + " )");
 
                     notificationsService.success("Request successfully saved", $scope.horseRequest.Name);
                     //angularHelper.getCurrentForm($scope).$setDirty();
@@ -156,7 +158,8 @@
             },
             function (response) {
                 notificationsService.error("Save failed for " + $scope.horseRequest.Name);
-
+                $scope.page.saving = false;
+                console.log("Loading finished ($scope.page.saving variable: " + $scope.page.saving + " )");
             });
         }
 

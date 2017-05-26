@@ -2,7 +2,12 @@
 
     <umb-load-indicator ng-if="page.loading"></umb-load-indicator>
 
-    <form name="horseRequestForm" ng-submit="save" val-form-manager>
+    <form name="horseRequestForm" ng-submit="save" val-form-manager ng-if="!page.loading">
+        <ul class="umb-load-indicator animated -half-second ng-scope" style="z-index:1000;" ng-if="page.saving">
+            <li class="umb-load-indicator__bubble"></li>
+            <li class="umb-load-indicator__bubble"></li>
+            <li class="umb-load-indicator__bubble"></li>
+        </ul>
         <!--<umb-panel>
             <umb-header>
                 <div class="span7">

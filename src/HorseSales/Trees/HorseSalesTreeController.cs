@@ -7,10 +7,13 @@ using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
 using Umbraco.Web.WebApi.Filters;
-using umbraco.BusinessLogic.Actions;
 using System.Collections.Generic;
+using HorseSales.API;
+using Umbraco.Web.UI.Controllers;
+using Umbraco.Web;
+using umbraco.BusinessLogic.Actions;
 
-namespace Umbraco.Web.UI.Controllers
+namespace HorseSales.Trees
 {
     [Tree("horseSales", "horseSalesTree", "Horse Requests")]
     [PluginController("LW")]
@@ -25,7 +28,7 @@ namespace Umbraco.Web.UI.Controllers
 
             if (id == uCore.Constants.System.Root.ToInvariantString())
             {
-                foreach (var request in ctrl.GetAll())
+                foreach (var request in ctrl.GetRequestsGroupByMember())
                 {
                     var node = CreateTreeNode("member" + request.MemberId.ToString(), "-1", queryStrings, request.GroupByMemberToString(), "icon-umb-users", request.HasChildren,
                                 queryStrings.GetValue<string>("application") + TreeAlias.EnsureStartsWith('/') + "/viewMember/" + request.MemberId
@@ -52,20 +55,21 @@ namespace Umbraco.Web.UI.Controllers
 
             if (id == uCore.Constants.System.Root.ToInvariantString())
             {
-                menu.Items.Add<ActionNew>("Open Dialog","actionRoute", queryStrings.GetValue<string>("application") + TreeAlias.EnsureStartsWith('/') + "/create/-1");
-                menu.Items.Add<ActionNew>("Additional Data", false, new Dictionary<string, object>() { { "testKey", "testValue" } });
+                menu.Items.Add<ActionNew>("New Request","actionRoute", queryStrings.GetValue<string>("application") + TreeAlias.EnsureStartsWith('/') + "/create/-1");
+                //menu.Items.Add<ActionNew>("Additional Data", false, new Dictionary<string, object>() { { "testKey", "testValue" } });
 
-                menu.Items.Add<CreateChildEntity, ActionNew>(ui.Text("actions", ActionNew.Instance.Alias));
-                menu.Items.Add<CreateChildEntity, ActionNew>("Additional Data", false, new Dictionary<string, object>() { { "testKey", "testValue" } });
+                //menu.Items.Add<CreateChildEntity, ActionNew>(ui.Text("actions", ActionNew.Instance.Alias));
+                //menu.Items.Add<CreateChildEntity, ActionNew>("Additional Data", false, new Dictionary<string, object>() { { "testKey", "testValue" } });
                 menu.Items.Add<RefreshNode, ActionRefresh>(ui.Text("actions", ActionRefresh.Instance.Alias), true);
             }
             else if (id.InvariantContains("member"))
             {
                 var numberId = id.Replace("member", "");
-
-                menu.Items.Add<RefreshNode, ActionRefresh>(ui.Text("actions", ActionRefresh.Instance.Alias));
+                menu.Items.Add<ActionNew>("New Request for Member", "actionRoute", queryStrings.GetValue<string>("application") + TreeAlias.EnsureStartsWith('/') + "/create/" + numberId);
+                menu.Items.Add<RefreshNode, ActionRefresh>(ui.Text("actions", ActionRefresh.Instance.Alias), true);
+            }else
+            {
                 menu.Items.Add<ActionDelete>(ui.Text("actions", ActionDelete.Instance.Alias), true);
-
             }
             return menu;
         }

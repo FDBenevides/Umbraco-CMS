@@ -107,6 +107,11 @@
       <Project>{f796ba67-b419-488d-b660-459e8ccac47a}</Project>
       <Name>YouTube</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HorseSales\HorseSales.csproj">
+      <Project>{097b6351-2fa8-44fd-a76f-307115775f19}</Project>
+      <Name>HorseSales</Name>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\UmbracoExamine\UmbracoExamine.csproj">
       <Project>{07fbc26b-2927-4a22-8d96-d644c667fecc}</Project>
       <Name>UmbracoExamine</Name>
@@ -399,18 +404,6 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="App_Plugins\LW\Application\HorseSalesSection.cs" />
-    <Compile Include="App_Plugins\LW\Events\RegisterEvents.cs" />
-    <Compile Include="App_Plugins\LW\Objects\HorseSales.cs" />
-    <Compile Include="App_Plugins\LW\Objects\HorseRequest.cs" />
-    <Compile Include="App_Plugins\LW\Objects\LinkPickerItemComment.cs" />
-    <Compile Include="App_Plugins\LW\Objects\LinkPickerItem.cs" />
-    <Compile Include="App_Plugins\LW\Objects\LinkPickerList.cs" />
-    <Compile Include="App_Plugins\LW\Objects\LinkPickerMode.cs" />
-    <Compile Include="Cache\DataTypeCacheProvider.cs" />
-    <Compile Include="Controllers\DataTypeApiController.cs" />
-    <Compile Include="Controllers\HorseSaleApiController.cs" />
-    <Compile Include="Controllers\HorseSalesTreeController.cs" />
     <Compile Include="Umbraco\Install\Legacy\LoadStarterKits.ascx.cs">
       <DependentUpon>loadStarterKits.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2545,6 +2538,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Umbraco\preview\" />
     <Folder Include="Umbraco_Client\FolderBrowser\Images\" />
     <Folder Include="Umbraco_Client\Tags\images\" />
@@ -2555,6 +2549,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>

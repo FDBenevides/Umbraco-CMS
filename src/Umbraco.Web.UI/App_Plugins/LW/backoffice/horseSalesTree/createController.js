@@ -60,7 +60,13 @@
                             notificationsService.success("Request successfully created", horseRequest.Name);
                             $location.path("/horseSales/horseSalesTree/edit/" + horseRequest.Id);
                         }
-                    })
+                    }, function (response) {
+                        if (response.data && response.data.ExceptionMessage) {
+                            notificationsService.error("Request creation failed: " + response.data.ExceptionMessage);
+                        } else {
+                            notificationsService.error("Request creation failed");
+                        }
+                    });
                 }
 
                 $scope.page.loading = false;

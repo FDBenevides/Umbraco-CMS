@@ -5,7 +5,7 @@ using Skybrud.Essentials.Json.Extensions;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Umbraco.Web.UI.App_Plugins.LW.Objects
+namespace HorseSales.Models
 {
 
     /// <summary>

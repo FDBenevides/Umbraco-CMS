@@ -6,8 +6,10 @@ using Skybrud.Essentials.Json.Extensions;
 using System.Data.SqlTypes;
 using Microsoft.SqlServer.Server;
 
-namespace Umbraco.Web.UI.App_Plugins.LW.Objects
+namespace HorseSales.Models
 {
+    ///// BASED ON Skybrud.LinkPicker project
+ 
     /// <summary>
     /// Class representing the model for the LinkPicker editor.
     /// </summary>

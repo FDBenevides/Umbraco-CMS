@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Caching;
 
-namespace Umbraco.Web.UI.Cache
+namespace HorseSales.Cache
 {
     public class DataTypeCacheProvider
     {

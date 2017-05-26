@@ -12,9 +12,9 @@ using Umbraco.Web.Editors;
 using Umbraco.Web.Models.ContentEditing;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
-using Umbraco.Web.UI.Cache;
+using HorseSales.Cache;
 
-namespace Umbraco.Web.UI.Controllers
+namespace HorseSales.API
 {
     [PluginController("LW")]
     public class DataTypeApiController : UmbracoAuthorizedJsonController

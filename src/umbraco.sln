@@ -118,6 +118,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.Tests.Benchmarks", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTube", "..\..\YouTube-Umbraco\YouTube\YouTube.csproj", "{F796BA67-B419-488D-B660-459E8CCAC47A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseSales", "HorseSales\HorseSales.csproj", "{097B6351-2FA8-44FD-A76F-307115775F19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -192,6 +194,10 @@ Global
 		{F796BA67-B419-488D-B660-459E8CCAC47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F796BA67-B419-488D-B660-459E8CCAC47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F796BA67-B419-488D-B660-459E8CCAC47A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{097B6351-2FA8-44FD-A76F-307115775F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{097B6351-2FA8-44FD-A76F-307115775F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{097B6351-2FA8-44FD-A76F-307115775F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{097B6351-2FA8-44FD-A76F-307115775F19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

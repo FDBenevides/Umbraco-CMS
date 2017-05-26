@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
-using Skybrud.LinkPicker.Json.Converters;
+﻿using HorseSales.Json;
+using Newtonsoft.Json;
 
-namespace Umbraco.Web.UI.App_Plugins.LW.Objects
+namespace HorseSales.Models
 {
+    ///// BASED ON Skybrud.LinkPicker project
 
     /// <summary>
     /// Enum describing the type of the link.

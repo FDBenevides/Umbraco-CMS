@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HorseSales.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 //using Skybrud.LinkPicker;
 using System;
@@ -9,7 +10,7 @@ using System.Web;
 using Umbraco.Core.Persistence;
 using Umbraco.Core.Persistence.DatabaseAnnotations;
 
-namespace Umbraco.Web.UI.App_Plugins.LW.Objects
+namespace HorseSales.Models
 {
     [TableName("HorseRequest")]
     [ExplicitColumns]
@@ -61,6 +62,10 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
         [NullSetting(NullSetting = NullSettings.Null)]
         public string CoatColor { get; set; }
 
+        [Column(Name = "Gender")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string Gender { get; set; }
+
         [Column(Name = "OtherDetails")]
         [SpecialDbType(SpecialDbTypes.NTEXT)]
         [NullSetting(NullSetting = NullSettings.Null)]
@@ -82,18 +87,22 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
         }
         private string _horseLinks;
 
-        [Ignore]
+        //[Ignore]
+        [Column(Name = "HorseLinksObj")]
+        [SpecialDbType(SpecialDbTypes.NTEXT)]
+        [JsonConverter(typeof(LinkPickerJsonConverter))]
         public LinkPickerList HorseLinksObj
         {
             get {
-                if(_horseLinksObj != null)
-                {
-                    return _horseLinksObj;
-                }else if(_horseLinks != null)
-                {
-                    return LinkPickerList.Parse(JObject.Parse(_horseLinks));
-                }
-                return new LinkPickerList();
+                //if(_horseLinksObj != null)
+                //{
+                //    return _horseLinksObj;
+                //}else if(_horseLinks != null)
+                //{
+                //    return LinkPickerList.Parse(JObject.Parse(_horseLinks));
+                //}
+                //return new LinkPickerList();
+                return _horseLinksObj;
             }
 
             set {
@@ -170,14 +179,24 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
                 HorseRequestProperty propId = HorseRequestProperty.GenerateProperty("Id", this.Id.ToString());
                 HorseRequestProperty propMemberId = HorseRequestProperty.GenerateProperty("MemberId", this.MemberId);
                 HorseRequestProperty propCoatColor = HorseRequestProperty.GenerateProperty("CoatColor", this.CoatColor);
-                HorseRequestProperty propGoal = HorseRequestProperty.GenerateProperty("Goal", this.Goal);
+                HorseRequestProperty propAge = HorseRequestProperty.GenerateProperty("AgeRange", this.AgeRange);
+                HorseRequestProperty propGender = HorseRequestProperty.GenerateProperty("Gender", this.Gender);
+                HorseRequestProperty propSize = HorseRequestProperty.GenerateProperty("Size", this.Size);
+                HorseRequestProperty propPriceRange = HorseRequestProperty.GenerateProperty("PriceRange", this.PriceRange);
                 HorseRequestProperty propDestination = HorseRequestProperty.GenerateProperty("Destination", this.Destination);
+                HorseRequestProperty propGoal = HorseRequestProperty.GenerateProperty("Goal", this.Goal);
+                HorseRequestProperty propOther = HorseRequestProperty.GenerateProperty("OtherDetails", this.OtherDetails);
 
                 properties.Add(propId);
                 properties.Add(propMemberId);
                 properties.Add(propCoatColor);
-                properties.Add(propGoal);
+                properties.Add(propAge);
+                properties.Add(propGender);
+                properties.Add(propSize);
+                properties.Add(propPriceRange);
                 properties.Add(propDestination);
+                properties.Add(propGoal);
+                properties.Add(propOther);
 
                 #endregion
 
@@ -204,7 +223,7 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
         #region Methods
         public string GroupByMemberToString()
         {
-            return MemberId + " (" + NumOfRequests + ")";
+            return MemberName + " (" + MemberId + ") - " + NumOfRequests;
         }
 
 
@@ -264,6 +283,8 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Objects
                 case "FinalHorseLinks":
                     return new HorseRequestProperty("/App_Plugins/Skybrud.LinkPicker/Views/LinkPicker.html", value, "FinalHorseLinksObj", name, false, string.Empty, false);
                 case "Goal":
+                    return new HorseRequestProperty("textarea", value, name, name, false, string.Empty, false);
+                case "OtherDetails":
                     return new HorseRequestProperty("textarea", value, name, name, false, string.Empty, false);
                 default:
                     return new HorseRequestProperty("textbox", value, name, name, false, string.Empty, false);

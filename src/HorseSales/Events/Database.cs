@@ -5,11 +5,12 @@ using System.Web;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Persistence;
-using Umbraco.Web.UI.App_Plugins.LW.Objects;
+using HorseSales.Models;
+using HorseSales.Persistence;
 
-namespace Umbraco.Web.UI.App_Plugins.LW.Events
+namespace HorseSales.Events
 {
-    public class RegisterEvents : ApplicationEventHandler
+    public class Database : ApplicationEventHandler
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
@@ -19,6 +20,14 @@ namespace Umbraco.Web.UI.App_Plugins.LW.Events
             if (!schemaHelper.TableExist("HorseRequest"))
             {
                 schemaHelper.CreateTable<HorseRequest>(false);
+            }
+            if (!schemaHelper.TableExist("HorseRequestDto"))
+            {
+                schemaHelper.CreateTable<HorseRequestDto>(false);
+            }
+            if (!schemaHelper.TableExist("HorseRequestSuggestionDto"))
+            {
+                schemaHelper.CreateTable<HorseRequestLinkDto>(false);
             }
         }
     }
