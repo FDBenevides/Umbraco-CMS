@@ -40,6 +40,8 @@ namespace HorseSales.Models
         [JsonProperty("datetime")]
         public string Datetime { get; set; }
 
+        [JsonProperty("id")]
+        public int Id { get; set; }
         #endregion
 
         #region Constructors
@@ -49,8 +51,9 @@ namespace HorseSales.Models
         /// <summary>
         /// Initializes a new link picker item.
         /// </summary>
-        public LinkPickerItemComment(string author, string datetime, string text)
+        public LinkPickerItemComment(int id, string author, string datetime, string text)
         {
+            Id = id;
             Author = author;
             Datetime = datetime;
             Text = text;

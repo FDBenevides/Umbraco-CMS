@@ -18,18 +18,20 @@ namespace HorseSales.Persistence
     {
         #region Constructors
 
-        public HorseRequestDto() { }
-
-        public HorseRequestDto(HorseRequest entity)
-        {
-            this.Id = entity.Id;
-            this.Name = entity.Name;
-            this.MemberId = entity.MemberId;
-            this.MemberName = entity.MemberName;
-            //TODO: suggestions links
-            //TODO: final links
-
+        public HorseRequestDto() {
+            HorseLinks = new List<HorseRequestLinkDto>();
         }
+
+        //public HorseRequestDto(HorseRequest entity)
+        //{
+        //    this.Id = entity.Id;
+        //    this.Name = entity.Name;
+        //    this.MemberId = entity.MemberId;
+        //    this.MemberName = entity.MemberName;
+        //    //TODO: suggestions links
+        //    //TODO: final links
+
+        //}
         #endregion
 
         #region Properties

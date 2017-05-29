@@ -132,10 +132,11 @@ namespace HorseSales.Models
             Mode = mode;
         }
 
-        public LinkPickerItem(int id, string name, string url, string target, string mode, LinkPickerItemComment[] comments, string reference, string price, string video)
+        public LinkPickerItem(int linkId, int id, string name, string url, string target, string mode, LinkPickerItemComment[] comments, string reference, string price, string video)
         {
-            LinkPickerMode modeEnum = (LinkPickerMode)Enum.Parse(typeof(LinkPickerMode), mode, true);
+            LinkPickerMode modeEnum = mode==null ? LinkPickerMode.Url : (LinkPickerMode)Enum.Parse(typeof(LinkPickerMode), mode, true);
 
+            LinkId = linkId;
             Id = id;
             Name = name;
             RawUrl = url;
@@ -220,6 +221,7 @@ namespace HorseSales.Models
             {
                 JObject = obj,
                 Id = id,
+                LinkId = obj.GetInt32("linkId"),
                 Name = obj.GetString("name"),
                 RawUrl = obj.GetString("url"),
                 Target = obj.GetString("target"),

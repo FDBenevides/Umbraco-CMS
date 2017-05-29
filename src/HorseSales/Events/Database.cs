@@ -25,9 +25,13 @@ namespace HorseSales.Events
             {
                 schemaHelper.CreateTable<HorseRequestDto>(false);
             }
-            if (!schemaHelper.TableExist("HorseRequestSuggestionDto"))
+            if (!schemaHelper.TableExist("HorseRequestLinkDto"))
             {
                 schemaHelper.CreateTable<HorseRequestLinkDto>(false);
+            }
+            if (!schemaHelper.TableExist("HorseRequestLinkCommentDto"))
+            {
+                schemaHelper.CreateTable<HorseRequestLinkCommentDto>(false);
             }
         }
     }

@@ -103,12 +103,14 @@
     <Compile Include="Models\HorseRequest.cs" />
     <Compile Include="Persistence\HorseRequestDatabase.cs" />
     <Compile Include="Persistence\HorseRequestDto.cs" />
+    <Compile Include="Persistence\HorseRequestLinkCommentDto.cs" />
     <Compile Include="Persistence\HorseRequestLinkDto.cs" />
     <Compile Include="Models\LinkPickerItem.cs" />
     <Compile Include="Models\LinkPickerItemComment.cs" />
     <Compile Include="Json\LinkPickerJsonConverter.cs" />
     <Compile Include="Models\LinkPickerList.cs" />
     <Compile Include="Models\LinkPickerMode.cs" />
+    <Compile Include="Persistence\HorseRequestLinkCommentRelator.cs" />
     <Compile Include="Persistence\HorseRequestLinkRelator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sections\HorseSalesSection.cs" />

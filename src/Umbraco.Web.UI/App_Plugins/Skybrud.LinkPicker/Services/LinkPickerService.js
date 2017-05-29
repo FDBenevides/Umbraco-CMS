@@ -8,7 +8,8 @@
                 name: e.name || '',
                 url: e.url,
                 target: e.target || '_self',
-                mode: (e.id ? (e.isMedia ? 'media' : 'content') : 'url')
+                mode: (e.id ? (e.isMedia ? 'media' : 'content') : 'url'),
+                linkId: e.linkId
             };
         },
 
@@ -50,7 +51,8 @@
                         id: link.id,
                         name: link.name,
                         url: link.url,
-                        target: link.target
+                        target: link.target,
+                        linkId: link.linkId
                     },
                     callback: function (e) {
                         if (!e.id && !e.url && !confirm('The selected link appears to be empty. Do you want to continue anyways?')) return;

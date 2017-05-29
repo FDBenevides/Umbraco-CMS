@@ -16,7 +16,8 @@
                 if (!scope.value) {
                     scope.value = {
                         title: '',
-                        items: []
+                        items: [],
+                        toDelete: []
                     };
                 }
 
@@ -72,6 +73,9 @@
                 var temp = [];
                 for (var i = 0; i < scope.value.items.length; i++) {
                     if (index != i) temp.push(scope.value.items[i]);
+                    else if(scope.value.items[i].linkId){
+                        scope.value.toDelete.push(scope.value.items[i].linkId);
+                    }
                 }
                 scope.value.items = temp;
             };

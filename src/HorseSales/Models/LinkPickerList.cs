@@ -50,6 +50,16 @@ namespace HorseSales.Models
         }
 
         /// <summary>
+        /// Gets an array of all item IDs to delete.
+        /// </summary>
+        [JsonProperty("toDelete")]
+        public string[] ToDelete
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets whether the link picker list has any items.
         /// </summary>
         [JsonIgnore]
@@ -86,6 +96,7 @@ namespace HorseSales.Models
         internal LinkPickerList()
         {
             Items = new LinkPickerItem[0];
+            ToDelete = new string[0];
         }
 
         /// <summary>
@@ -97,6 +108,7 @@ namespace HorseSales.Models
             JObject = obj;
             Title = obj.GetString("title");
             Items = (obj.GetArray("items", LinkPickerItem.Parse) ?? new LinkPickerItem[0]).Where(x => x.IsValid).ToArray();
+            ToDelete = obj.GetStringArray("toDelete");
         }
 
         /// <summary>

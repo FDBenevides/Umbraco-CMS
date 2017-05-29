@@ -149,7 +149,11 @@
 
                     notificationsService.success("Request successfully saved", $scope.horseRequest.Name);
                     //angularHelper.getCurrentForm($scope).$setDirty();
-                    $scope.horseRequestForm.$dirty = false;
+                    if($scope.horseRequestForm)
+                        $scope.horseRequestForm.$dirty = false;
+                    else if (horseRequestForm)
+                        horseRequestForm.$dirty = false;
+
                     navigationService.syncTree({ tree: 'horseSalesTree', path: [-1, $scope.id], forceReload: true }).then(
                         function (syncArgs) {
                             navigationService.reloadNode(syncArgs.node);

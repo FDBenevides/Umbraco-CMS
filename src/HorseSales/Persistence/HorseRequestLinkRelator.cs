@@ -18,11 +18,9 @@ namespace HorseSales.Persistence
             // Is this the same HorseRequestDto as the current one we're processing
             if (Current != null && Current.Id == a.Id)
             {
-                if (p.Id > 0)
+                if (p.LinkId > 0)
                 {
                     // Yes, just add this HorseRequestLinkDto to the current item's collection
-
-                    //TODO check condition to decide if it will be added to the suggestions or final list
                     Current.HorseLinks.Add(p);
                 }
 
@@ -38,9 +36,8 @@ namespace HorseSales.Persistence
 
             // Setup the new current HorseRequestDto
             Current = a;
-            Current.HorseLinks = new List<HorseRequestLinkDto>();
             //this can be null since we are doing a left join
-            if (p.Id > 0)
+            if (p.LinkId > 0)
             {
                 //TODO check condition to decide if it will be added to the suggestions or final list
                 Current.HorseLinks.Add(p);

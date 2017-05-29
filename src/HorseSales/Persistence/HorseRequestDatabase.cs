@@ -33,7 +33,9 @@ namespace HorseSales.Persistence
             {
                 suggestionsLinks.AddRange(dto.HorseLinks.
                                     Where(x => x.Type.InvariantEquals("suggestions")).
-                                    Select(x => new LinkPickerItem(x.Id, x.Type, x.Type, x.Type, LinkPickerMode.Url)));
+                                    Select(x => new LinkPickerItem(x.LinkId, x.Id, x.Name, x.Url, x.Target, x.Mode,
+                                                                    x.Comments.Select(comment=> new LinkPickerItemComment(comment.Id, comment.Author, comment.Text, comment.Datetime)).ToArray(), 
+                                                                    x.Ref,x.Price, x.Video)));
 
                 finalLinks.AddRange(dto.HorseLinks.
                                     Where(x => x.Type.InvariantEquals("final")).
@@ -159,6 +161,12 @@ namespace HorseSales.Persistence
             return result;
         }
 
+
+        /// <summary>
+        /// Retrieves a detailed request by Id.
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns>The request including all related links and link comments</returns>
         public HorseRequest GetBydId(int requestId)
         {
             var sql = new Sql();
@@ -166,12 +174,15 @@ namespace HorseSales.Persistence
                 .From<HorseRequestDto>(SqlSyntax)
                 .LeftJoin<HorseRequestLinkDto>(SqlSyntax)
                 .On<HorseRequestDto, HorseRequestLinkDto>(SqlSyntax, left => left.Id, right => right.RequestId)
+                .LeftJoin<HorseRequestLinkCommentDto>(SqlSyntax)
+                .On<HorseRequestLinkDto, HorseRequestLinkCommentDto>(SqlSyntax, left => left.LinkId, right => right.LinkId)
                 .Where<HorseRequestDto>(req => req.Id.Equals(requestId), SqlSyntax)
                 //MUST be ordered by this GUID ID for the HorseRequestLinkRelator to work
                 .OrderBy<HorseRequestDto>(dto => dto.Id, SqlSyntax);
 
             var db = DatabaseContext.Database;
-            var dtos = db.Fetch<HorseRequestDto, HorseRequestLinkDto, HorseRequestDto>(new HorseRequestLinkRelator().Map, sql);
+            //var dtos = db.Fetch<HorseRequestDto, HorseRequestLinkDto, HorseRequestDto>(new HorseRequestLinkRelator().Map, sql);
+            var dtos = db.Fetch<HorseRequestDto, HorseRequestLinkDto, HorseRequestLinkCommentDto, HorseRequestDto>(new HorseRequestLinkCommentRelator().Map, sql);
 
             var result = dtos.Select(x => BuildEntity(x)).First();
             return result;
@@ -193,7 +204,22 @@ namespace HorseSales.Persistence
             var dto = BuildDto(request);
 
             var db = DatabaseContext.Database;
-            db.Save(dto);
+            db.Update(dto);
+
+            foreach (var link in dto.HorseLinks)
+            {
+                db.Save(link);                
+            }
+            foreach (var toDeleteId in request.HorseLinksObj.ToDelete)
+            {
+                //the cast is to force to go to the desired function specification 'Delete<T>(object pocoOrPrimaryKey)'
+                db.Delete<HorseRequestLinkDto>((object)toDeleteId);
+            }
+            foreach (var toDeleteId in request.FinalHorseLinksObj.ToDelete)
+            {
+                //the cast is to force to go to the desired function specification 'Delete<T>(object pocoOrPrimaryKey)'
+                db.Delete<HorseRequestLinkDto>((object)toDeleteId);
+            }
 
             var entity = BuildEntity(dto);
             return entity;
