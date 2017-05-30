@@ -17,10 +17,6 @@ namespace HorseSales.Events
             var db = applicationContext.DatabaseContext.Database;
             var schemaHelper = new DatabaseSchemaHelper(db, LoggerResolver.Current.Logger, applicationContext.DatabaseContext.SqlSyntax);
 
-            if (!schemaHelper.TableExist("HorseRequest"))
-            {
-                schemaHelper.CreateTable<HorseRequest>(false);
-            }
             if (!schemaHelper.TableExist("HorseRequestDto"))
             {
                 schemaHelper.CreateTable<HorseRequestDto>(false);

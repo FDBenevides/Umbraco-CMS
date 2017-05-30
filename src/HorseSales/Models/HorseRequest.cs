@@ -12,96 +12,56 @@ using Umbraco.Core.Persistence.DatabaseAnnotations;
 
 namespace HorseSales.Models
 {
-    [TableName("HorseRequest")]
-    [ExplicitColumns]
     public class HorseRequest
     {
         #region Constructors
-        public HorseRequest()
-        {
-
-        }
+        public HorseRequest() {  }
         #endregion
 
         #region Properties
-        [Column(Name = "Id")]
-        [PrimaryKeyColumn(AutoIncrement = true)]
         public int Id { get; set; }
 
-        [Column(Name = "Name")]
         public string Name { get; set; }
 
-        [Column(Name = "MemberId")]
         public string MemberId { get; set; }
 
-        [Column(Name = "MemberName")]
         public string MemberName { get; set; }
 
-        [Column(Name = "AgeRange")]
-        [NullSetting(NullSetting = NullSettings.Null)]
-        public string AgeRange { get; set; }
+        public string AgeMin { get; set; }
+        public string AgeMax { get; set; }
 
-        [Column(Name = "Size")]
-        [NullSetting(NullSetting = NullSettings.Null)]
-        public string Size { get; set; }
+        public string SizeMin { get; set; }
+        public string SizeMax { get; set; }
 
-        [Column(Name = "Destination")]
-        [NullSetting(NullSetting = NullSettings.Null)]
         public string Destination { get; set; }
 
-        [Column(Name = "PriceRange")]
-        [NullSetting(NullSetting = NullSettings.Null)]
-        public string PriceRange { get; set; }
+        public string PriceMin { get; set; }
+        public string PriceMax { get; set; }
 
-        [Column(Name = "Goal")]
-        [SpecialDbType(SpecialDbTypes.NTEXT)]
-        [NullSetting(NullSetting = NullSettings.Null)]
         public string Goal { get; set; }
 
-        [Column(Name = "CoatColor")]
-        [NullSetting(NullSetting = NullSettings.Null)]
         public string CoatColor { get; set; }
 
-        [Column(Name = "Gender")]
-        [NullSetting(NullSetting = NullSettings.Null)]
         public string Gender { get; set; }
 
-        [Column(Name = "OtherDetails")]
-        [SpecialDbType(SpecialDbTypes.NTEXT)]
-        [NullSetting(NullSetting = NullSettings.Null)]
         public string OtherDetails { get; set; }
 
-        [Column(Name = "HorseLinks")]
-        [SpecialDbType(SpecialDbTypes.NTEXT)]
-        [NullSetting(NullSetting = NullSettings.Null)]      
-        public string HorseLinks
-        {
-            get
-            {
-                return _horseLinks;
-            }
-            set
-            {
-                _horseLinks = value;
-            }
-        }
-        private string _horseLinks;
+        public string Status { get; set; }
 
-        //[Ignore]
-        [Column(Name = "HorseLinksObj")]
-        [SpecialDbType(SpecialDbTypes.NTEXT)]
+        public string Discipline { get; set; }
+
+        public string TeachingLevel { get; set; }
+        public string TeachingLevelAux { get; set; }
+
+        public string Temperament { get; set; }
+        public string TemperamentAux { get; set; }
+
+        public string PiroFree{ get; set; }
+
         [JsonConverter(typeof(LinkPickerJsonConverter))]
         public LinkPickerList HorseLinksObj
         {
             get {
-                //if(_horseLinksObj != null)
-                //{
-                //    return _horseLinksObj;
-                //}else if(_horseLinks != null)
-                //{
-                //    return LinkPickerList.Parse(JObject.Parse(_horseLinks));
-                //}
-                //return new LinkPickerList();
                 return _horseLinksObj;
             }
 
@@ -111,37 +71,12 @@ namespace HorseSales.Models
         }
         private LinkPickerList _horseLinksObj;
 
-
-        [Column(Name = "FinalHorseLinks")]
-        [SpecialDbType(SpecialDbTypes.NTEXT)]
-        [NullSetting(NullSetting = NullSettings.Null)]
-        public string FinalHorseLinks
-        {
-            get
-            {
-                return _finalHorseLinks;
-            }
-            set
-            {
-                _finalHorseLinks = value;
-            }
-        }
-        private string _finalHorseLinks;
-
-        [Ignore]
+        [JsonConverter(typeof(LinkPickerJsonConverter))]
         public LinkPickerList FinalHorseLinksObj
         {
             get
             {
-                if (_finalHorseLinksObj != null)
-                {
-                    return _finalHorseLinksObj;
-                }
-                else if (_finalHorseLinks != null)
-                {
-                    return LinkPickerList.Parse(JObject.Parse(_finalHorseLinks));
-                }
-                return new LinkPickerList();
+                return _finalHorseLinksObj;
             }
 
             set
@@ -151,12 +86,8 @@ namespace HorseSales.Models
         }
         private LinkPickerList _finalHorseLinksObj;
 
-
-        [ResultColumn]
         public int NumOfRequests { get; set; }
 
-
-        [IgnoreAttribute()]
         public bool HasChildren
         {
             get
@@ -165,7 +96,6 @@ namespace HorseSales.Models
             }
         }
 
-        [IgnoreAttribute()]
         public Dictionary<string, List<HorseRequestProperty>> Tabs
         {
             get
@@ -179,24 +109,44 @@ namespace HorseSales.Models
                 HorseRequestProperty propId = HorseRequestProperty.GenerateProperty("Id", this.Id.ToString());
                 HorseRequestProperty propMemberId = HorseRequestProperty.GenerateProperty("MemberId", this.MemberId);
                 HorseRequestProperty propCoatColor = HorseRequestProperty.GenerateProperty("CoatColor", this.CoatColor);
-                HorseRequestProperty propAge = HorseRequestProperty.GenerateProperty("AgeRange", this.AgeRange);
+                HorseRequestProperty propAgeMin = HorseRequestProperty.GenerateProperty("AgeMin", this.AgeMin);
+                HorseRequestProperty propAgeMax = HorseRequestProperty.GenerateProperty("AgeMin", this.AgeMax);
                 HorseRequestProperty propGender = HorseRequestProperty.GenerateProperty("Gender", this.Gender);
-                HorseRequestProperty propSize = HorseRequestProperty.GenerateProperty("Size", this.Size);
-                HorseRequestProperty propPriceRange = HorseRequestProperty.GenerateProperty("PriceRange", this.PriceRange);
+                HorseRequestProperty propSizeMin = HorseRequestProperty.GenerateProperty("SizeMin", this.SizeMin);
+                HorseRequestProperty propSizeMax = HorseRequestProperty.GenerateProperty("SizeMax", this.SizeMax);
+                HorseRequestProperty propPriceMin = HorseRequestProperty.GenerateProperty("PriceMin", this.PriceMin);
+                HorseRequestProperty propPriceMax = HorseRequestProperty.GenerateProperty("PriceMax", this.PriceMax);
                 HorseRequestProperty propDestination = HorseRequestProperty.GenerateProperty("Destination", this.Destination);
                 HorseRequestProperty propGoal = HorseRequestProperty.GenerateProperty("Goal", this.Goal);
                 HorseRequestProperty propOther = HorseRequestProperty.GenerateProperty("OtherDetails", this.OtherDetails);
+                HorseRequestProperty propDiscipline = HorseRequestProperty.GenerateProperty("Discipline", this.Discipline);
+                HorseRequestProperty propPiroFree = HorseRequestProperty.GenerateProperty("PiroFree", this.PiroFree);
+                HorseRequestProperty propStatus = HorseRequestProperty.GenerateProperty("Status", this.Status);
+                HorseRequestProperty propTeachingLevel = HorseRequestProperty.GenerateProperty("TeachingLevel", this.TeachingLevel);
+                HorseRequestProperty propTeachingLevelAux = HorseRequestProperty.GenerateProperty("TeachingLevelAux", this.TeachingLevelAux);
+                HorseRequestProperty propTemperament = HorseRequestProperty.GenerateProperty("Temperament", this.Temperament);
+                HorseRequestProperty propTemperamentAux = HorseRequestProperty.GenerateProperty("TemperamentAux", this.TemperamentAux);
 
                 properties.Add(propId);
                 properties.Add(propMemberId);
                 properties.Add(propCoatColor);
-                properties.Add(propAge);
+                properties.Add(propAgeMin);
+                properties.Add(propAgeMax);
                 properties.Add(propGender);
-                properties.Add(propSize);
-                properties.Add(propPriceRange);
+                properties.Add(propSizeMin);
+                properties.Add(propSizeMax);
+                properties.Add(propPriceMin);
+                properties.Add(propPriceMax);
                 properties.Add(propDestination);
                 properties.Add(propGoal);
                 properties.Add(propOther);
+                properties.Add(propDiscipline);
+                properties.Add(propPiroFree);
+                properties.Add(propStatus);
+                properties.Add(propTeachingLevel);
+                properties.Add(propTeachingLevelAux);
+                properties.Add(propTemperament);
+                properties.Add(propTemperamentAux);
 
                 #endregion
 
@@ -277,7 +227,7 @@ namespace HorseSales.Models
                 case "MemberId":
                     return new HorseRequestProperty("readonlyvalue", value, name, name, false, string.Empty, false);
                 case "CoatColor":
-                    return new HorseRequestProperty("Dropdown Coat Color", value, name, name, false, string.Empty, true);
+                    return new HorseRequestProperty("textbox", value, name, name, false, string.Empty, false);
                 case "HorseLinks":
                     return new HorseRequestProperty("/App_Plugins/Skybrud.LinkPicker/Views/LinkPicker.html", value, "HorseLinksObj", name, false, string.Empty, false);
                 case "FinalHorseLinks":
@@ -286,6 +236,8 @@ namespace HorseSales.Models
                     return new HorseRequestProperty("textarea", value, name, name, false, string.Empty, false);
                 case "OtherDetails":
                     return new HorseRequestProperty("textarea", value, name, name, false, string.Empty, false);
+                case "Status":
+                    return new HorseRequestProperty("readonlyvalue", value, name, name, false, string.Empty, false);
                 default:
                     return new HorseRequestProperty("textbox", value, name, name, false, string.Empty, false);
             }

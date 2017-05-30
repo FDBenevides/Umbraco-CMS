@@ -21,17 +21,6 @@ namespace HorseSales.Persistence
         public HorseRequestDto() {
             HorseLinks = new List<HorseRequestLinkDto>();
         }
-
-        //public HorseRequestDto(HorseRequest entity)
-        //{
-        //    this.Id = entity.Id;
-        //    this.Name = entity.Name;
-        //    this.MemberId = entity.MemberId;
-        //    this.MemberName = entity.MemberName;
-        //    //TODO: suggestions links
-        //    //TODO: final links
-
-        //}
         #endregion
 
         #region Properties
@@ -48,21 +37,33 @@ namespace HorseSales.Persistence
         [Column(Name = "memberName")]
         public string MemberName { get; set; }
 
-        [Column(Name = "ageRange")]
+        [Column(Name = "ageMin")]
         [NullSetting(NullSetting = NullSettings.Null)]
-        public string AgeRange { get; set; }
+        public string AgeMin { get; set; }
 
-        [Column(Name = "size")]
+        [Column(Name = "ageMax")]
         [NullSetting(NullSetting = NullSettings.Null)]
-        public string Size { get; set; }
+        public string AgeMax { get; set; }
+
+        [Column(Name = "sizeMin")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string SizeMin { get; set; }
+
+        [Column(Name = "sizeMax")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string SizeMax { get; set; }
 
         [Column(Name = "destination")]
         [NullSetting(NullSetting = NullSettings.Null)]
         public string Destination { get; set; }
 
-        [Column(Name = "priceRange")]
+        [Column(Name = "priceMin")]
         [NullSetting(NullSetting = NullSettings.Null)]
-        public string PriceRange { get; set; }
+        public string PriceMin { get; set; }
+
+        [Column(Name = "priceMax")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string PriceMax { get; set; }
 
         [Column(Name = "goal")]
         [SpecialDbType(SpecialDbTypes.NTEXT)]
@@ -81,6 +82,34 @@ namespace HorseSales.Persistence
         [SpecialDbType(SpecialDbTypes.NTEXT)]
         [NullSetting(NullSetting = NullSettings.Null)]
         public string OtherDetails { get; set; }
+
+        [Column(Name = "status")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string Status { get; set; }
+
+        [Column(Name = "discipline")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string Discipline { get; set; }
+
+        [Column(Name = "teachingLevel")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string TeachingLevel { get; set; }
+
+        [Column(Name = "teachingLevelAux")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string TeachingLevelAux { get; set; }
+
+        [Column(Name = "temperament")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string Temperament { get; set; }
+
+        [Column(Name = "temperamentAux")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string TemperamentAux { get; set; }
+
+        [Column(Name = "piroFree")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string PiroFree { get; set; }
 
         [ResultColumn]
         public List<HorseRequestLinkDto> HorseLinks { get; set; }

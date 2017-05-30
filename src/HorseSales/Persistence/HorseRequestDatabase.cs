@@ -24,22 +24,54 @@ namespace HorseSales.Persistence
         }
         #endregion
 
-        #region protected methods
+        #region Build Entity methods
+        protected List<LinkPickerItemComment> BuildLinkCommentsEntity(IEnumerable<HorseRequestLinkCommentDto> commentsDto)
+        {
+            var commentsList = new List<LinkPickerItemComment>();
+
+            if (commentsDto != null)
+            {
+                foreach (var commentDto in commentsDto)
+                {
+                    var comment = new LinkPickerItemComment(commentDto.Id, commentDto.Author,
+                                                            commentDto.Datetime, commentDto.Text);
+                    commentsList.Add(comment);
+                }
+            }
+
+            return commentsList;
+        }
+
+        protected List<LinkPickerItem> BuildLinkEntity(IEnumerable<HorseRequestLinkDto> linksDto)
+        {
+            var linkList = new List<LinkPickerItem>();
+
+            foreach (var linkDto in linksDto)
+            {
+                var comments = BuildLinkCommentsEntity(linkDto.Comments);
+
+                var link = new LinkPickerItem(linkDto.LinkId, linkDto.Id, linkDto.Name, linkDto.Url,
+                                              linkDto.Target, linkDto.Mode,
+                                              comments.ToArray(),
+                                              linkDto.Ref, linkDto.Price, linkDto.Video);
+
+                linkList.Add(link);
+            }
+
+            return linkList;
+        }
+
         protected HorseRequest BuildEntity(HorseRequestDto dto)
         {
             var suggestionsLinks = new List<LinkPickerItem>();
             var finalLinks = new List<LinkPickerItem>();
-            if (dto.HorseLinks != null)
+            if ((dto.HorseLinks != null) && (dto.HorseLinks.Count > 0))
             {
-                suggestionsLinks.AddRange(dto.HorseLinks.
-                                    Where(x => x.Type.InvariantEquals("suggestions")).
-                                    Select(x => new LinkPickerItem(x.LinkId, x.Id, x.Name, x.Url, x.Target, x.Mode,
-                                                                    x.Comments.Select(comment=> new LinkPickerItemComment(comment.Id, comment.Author, comment.Text, comment.Datetime)).ToArray(), 
-                                                                    x.Ref,x.Price, x.Video)));
+                var suggestionsDto = dto.HorseLinks.Where(x => x.Type.InvariantEquals("suggestions"));
+                var finalDto = dto.HorseLinks.Where(x => x.Type.InvariantEquals("final"));
 
-                finalLinks.AddRange(dto.HorseLinks.
-                                    Where(x => x.Type.InvariantEquals("final")).
-                                    Select(x => new LinkPickerItem(x.Id, x.Type, x.Type, x.Type, LinkPickerMode.Url)));
+                suggestionsLinks = BuildLinkEntity(suggestionsDto);
+                finalLinks = BuildLinkEntity(finalDto);
             }
 
             var entity = new HorseRequest()
@@ -49,6 +81,24 @@ namespace HorseSales.Persistence
                 MemberId = dto.MemberId,
                 MemberName = dto.MemberName,
                 CoatColor = dto.CoatColor,
+                AgeMax = dto.AgeMax,
+                AgeMin = dto.AgeMin,
+                Destination = dto.Destination,
+                Gender = dto.Gender,
+                Goal = dto.Goal,
+                OtherDetails = dto.OtherDetails,
+                PriceMax = dto.PriceMax,
+                PriceMin = dto.PriceMin,
+                SizeMax = dto.SizeMax,
+                SizeMin = dto.SizeMin,
+                Discipline = dto.Discipline,
+                PiroFree = dto.PiroFree,
+                Status = dto.Status,
+                TeachingLevel = dto.TeachingLevel,
+                TeachingLevelAux = dto.TeachingLevelAux,
+                Temperament = dto.Temperament,
+                TemperamentAux = dto.TemperamentAux,
+
                 HorseLinksObj = new LinkPickerList() { Items = suggestionsLinks.ToArray() },
                 FinalHorseLinksObj = new LinkPickerList() { Items = finalLinks.ToArray() },
                 NumOfRequests = dto.NumOfRequests
@@ -56,31 +106,79 @@ namespace HorseSales.Persistence
 
             return entity;
         }
+        #endregion
 
-        public HorseRequestDto BuildDto(HorseRequest entity)
+        #region Build DTO methods
+
+        protected List<HorseRequestLinkCommentDto> BuildRequestLinkCommentsDto(LinkPickerItemComment[] items, int linkId)
+        {
+            var comments = new List<HorseRequestLinkCommentDto>();
+
+            foreach (var linkComment in items)
+            {
+                var comment = new HorseRequestLinkCommentDto()
+                {
+                    LinkId = linkId,
+                    Id = linkComment.Id,
+                    Author = linkComment.Author,
+                    Text = linkComment.Text,
+                    Datetime = linkComment.Datetime
+                };
+
+                comments.Add(comment);
+            }
+
+            return comments;
+        }
+
+        protected List<HorseRequestLinkDto> BuildRequestLinksDto(LinkPickerItem[] items, int requestId, string type)
         {
             List<HorseRequestLinkDto> links = new List<HorseRequestLinkDto>();
 
-            if ((entity.HorseLinksObj !=null) && entity.HorseLinksObj.HasItems)
+            foreach (var item in items)
             {
-                links.AddRange(entity.HorseLinksObj.Items.Select(link => new HorseRequestLinkDto()
+                var link = new HorseRequestLinkDto()
                 {
-                    LinkId = link.LinkId,
-                    Id = link.Id,
-                    RequestId = entity.Id,
-                    Type = "suggestions"
-                }));
+                    LinkId = item.LinkId,
+                    Id = item.Id,
+                    RequestId = requestId,
+                    Type = type,
+                    Mode = item.Mode.ToString(),
+                    Name = item.Name,
+                    Target = item.Target,
+                    Url = item.Url,
+                    Price = item.Price,
+                    Ref = item.Ref,
+                    Video = item.Video,
+                    Comments = new List<HorseRequestLinkCommentDto>()
+                };
+
+                if ((item.Comments != null) && (item.Comments.Length > 0))
+                {
+                    ///add comment to the linkDto
+                    link.Comments.AddRange(BuildRequestLinkCommentsDto(item.Comments, item.LinkId));
+                }
+
+                links.Add(link);
             }
 
-            if ((entity.FinalHorseLinksObj !=null) && entity.FinalHorseLinksObj.HasItems)
+            return links;
+        }
+
+        protected HorseRequestDto BuildDto(HorseRequest entity)
+        {
+            List<HorseRequestLinkDto> links = new List<HorseRequestLinkDto>();
+
+            if ((entity.HorseLinksObj != null) && entity.HorseLinksObj.HasItems)
             {
-                links.AddRange(entity.HorseLinksObj.Items.Select(link => new HorseRequestLinkDto()
-                {
-                    LinkId = link.LinkId,
-                    Id = link.Id,
-                    RequestId = entity.Id,
-                    Type = "final"
-                }));
+                ///add suggestions to the list of links
+                links.AddRange(BuildRequestLinksDto(entity.HorseLinksObj.Items, entity.Id, "suggestions"));
+            }
+
+            if ((entity.FinalHorseLinksObj != null) && entity.FinalHorseLinksObj.HasItems)
+            {
+                ///add final links to the list of links
+                links.AddRange(BuildRequestLinksDto(entity.FinalHorseLinksObj.Items, entity.Id, "final"));
             }
 
             var dto = new HorseRequestDto
@@ -89,14 +187,24 @@ namespace HorseSales.Persistence
                 Name = entity.Name,
                 MemberId = entity.MemberId,
                 MemberName = entity.MemberName,
-                AgeRange = entity.AgeRange,
+                AgeMin = entity.AgeMin,
+                AgeMax = entity.AgeMax,
                 CoatColor = entity.CoatColor,
                 Destination = entity.Destination,
                 Gender = entity.Gender,
-                PriceRange = entity.PriceRange,
-                Size = entity.Size,
+                PriceMin = entity.PriceMin,
+                PriceMax = entity.PriceMax,
+                SizeMin = entity.SizeMin,
+                SizeMax = entity.SizeMax,
                 Goal = entity.Goal,
                 OtherDetails = entity.OtherDetails,
+                Discipline = entity.Discipline,
+                PiroFree = entity.PiroFree,
+                Status = entity.Status,
+                TeachingLevel = entity.TeachingLevel,
+                TeachingLevelAux = entity.TeachingLevelAux,
+                Temperament = entity.Temperament,
+                TemperamentAux = entity.TemperamentAux,
                 HorseLinks = links
             };
 
@@ -112,7 +220,7 @@ namespace HorseSales.Persistence
             sql.Select("[memberId],[memberName], count(id) as NumOfRequests")
                 .From<HorseRequestDto>(SqlSyntax)
                 .GroupBy("[memberId]", "[memberName]");
-                //GroupBy<HorseRequestDto>(x => x.MemberId, SqlSyntax);
+            //GroupBy<HorseRequestDto>(x => x.MemberId, SqlSyntax);
 
             var db = DatabaseContext.Database;
             var dtos = db.Fetch<HorseRequestDto>(sql);
@@ -208,7 +316,11 @@ namespace HorseSales.Persistence
 
             foreach (var link in dto.HorseLinks)
             {
-                db.Save(link);                
+                foreach (var linkComment in link.Comments)
+                {
+                    db.Save(linkComment);
+                }
+                db.Save(link);
             }
             foreach (var toDeleteId in request.HorseLinksObj.ToDelete)
             {

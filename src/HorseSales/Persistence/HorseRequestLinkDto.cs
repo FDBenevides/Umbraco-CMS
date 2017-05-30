@@ -25,12 +25,12 @@ namespace HorseSales.Persistence
         [Column(Name = "linkId")]
         public int LinkId { get; set; }
 
-        [Column(Name = "id")]
-        public int Id { get; set; }
-
         [Column(Name = "requestId")]
         [ForeignKey(typeof(HorseRequestDto))]
         public int RequestId { get; set; }
+
+        [Column(Name = "id")]
+        public int Id { get; set; }
 
         [Column(Name = "type")]
         public string Type { get; set; }
@@ -48,12 +48,15 @@ namespace HorseSales.Persistence
         public string Target { get; set; }
 
         [Column(Name = "ref")]
+        [NullSetting(NullSetting = NullSettings.Null)]
         public string Ref { get; set; }
 
         [Column(Name = "price")]
+        [NullSetting(NullSetting = NullSettings.Null)]
         public string Price { get; set; }
 
         [Column(Name = "video")]
+        [NullSetting(NullSetting = NullSettings.Null)]
         public string Video { get; set; }
 
         [ResultColumn]
